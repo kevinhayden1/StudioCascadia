@@ -1,0 +1,56 @@
+{% extends 'base.j2' %}
+
+<html>
+
+{% block head %}
+
+    <head>
+        <title></title>
+    </head>
+
+{% endblock %}
+
+{% block body %}
+
+    <body>
+        <h1></h1>
+        <h2></h2>
+        <h3>Payment Management</h3>
+        <p></p>
+        <table>
+        <thead>
+        <tr>
+            <!-- Iterate through each key in the first entry to get the
+            column name -->
+            {% for key in Payments[0].keys() %}
+
+            <!-- Create a <th> tag with the key inside of it, this will be
+            our header row -->
+            <th>{{ key }}</th>
+
+            <!-- End of this for loop -->
+            {% endfor %}
+        </tr>
+        <tbody>
+
+        <!-- Now, iterate through every person in Payments -->
+        {% for person in Payments %}
+        <tr>
+            <!-- Then iterate through every key in the current person dictionary -->
+            {% for key in person.keys() %}
+
+            <!-- Create a <td> element with the value of that key in it -->
+            <td>{{person[key]}}</td>
+            {% endfor %}
+
+            <!-- Create our edit/delete buttons -->
+            <td><a href="edit_payment/{{id}}" class="btn btn-default">Edit</a></td>
+            <td><a href="delete_payment/{{id}}" class="btn btn-default">Delete</a></td>
+        </tr>
+        {% endfor %}
+        </table>
+    </body>
+
+{% endblock %}
+
+</html>

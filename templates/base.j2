@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        
+        <title>Studio Cascadia DBMS</title>
+
+            <h1>Studio Cascadia DBMS</h1>
+            <h3>Database Engineer Portal</h3>
+            <p><a href="{{ url_for('root') }}">Main</a>
+            <a href="{{ url_for('artists') }}">Artists</a>
+            <a href="{{ url_for('customers') }}">Customers</a>
+            <a href="{{ url_for('locations') }}">Locations</a>
+            <a href="{{ url_for('mediums') }}">Mediums</a>
+            <a href="{{ url_for('payments') }}">Payments</a>
+            <a href="{{ url_for('pieces_artists') }}">Pieces_Artists</a>
+            <a href="{{ url_for('pieces') }}">Pieces</a>
+            <a href="{{ url_for('sales') }}">Sales</a>
+            <a href="{{ url_for('shipments') }}">Shipments</a></p>
+        {% block head %} {% endblock %}
+    </head>
+    
+    <body>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        
+        {% block body %}{% endblock %}
+    </body>
+
+</html>
