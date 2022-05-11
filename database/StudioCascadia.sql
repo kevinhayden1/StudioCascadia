@@ -237,13 +237,19 @@ VALUES
     '98122'
 ),
 (
+    'Studio Cascadia Spokane',
+    '1326 E Sprague Ave',
+    'Spokane',
+    'WA',
+    '99202'
+),
+(
     'Studio Cascadia Portland',
     '22 SW 3rd Ave',
     'Portland',
     'OR',
     '97204'
 );
-
 
 --Customers
 CREATE OR REPLACE TABLE Customers
