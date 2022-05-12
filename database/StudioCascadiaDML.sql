@@ -15,36 +15,34 @@ programming language.
 --SELECT
 
 --Search by id and display the information
-SELECT * FROM Artists WHERE id == :id;
-SELECT * FROM Pieces WHERE id == :id;
-SELECT * FROM Mediums WHERE id == :id;
-SELECT * FROM Customers WHERE id == :id;
-SELECT * FROM Locations WHERE id == :id;
-SELECT * FROM Sales where id == :id;
-SELECT * FROM Payments WHERE id == :id;
-SELECT * FROM Shipments Where id == :id;
+SELECT * FROM Artists WHERE id = :id;
+SELECT * FROM Pieces WHERE id = :id;
+SELECT * FROM Mediums WHERE id = :id;
+SELECT * FROM Customers WHERE id = :id;
+SELECT * FROM Locations WHERE id = :id;
+SELECT * FROM Sales where id = :id;
+SELECT * FROM Payments WHERE id = :id;
+SELECT * FROM Shipments Where id = :id;
 
 
--get all artists with their current pieces to list
+--get all artists with their current pieces to list
 SELECT artist_id, piece_id, CONCAT(first_name,' ',last_name) AS name, CONCAT(title,', ',year) AS piece
 FROM Artists
-INNER JOIN artists_pieces ON Artists.id = Artists_Pieces.artist_id
-INNER JOIN Pieces ON Pieces.id = Artists.Pieces.piece_id
+INNER JOIN Pieces_Artists ON Artists.id = Pieces_Artists.artist_id
+INNER JOIN Pieces ON Pieces.id = Pieces_Artists.piece_id
 ORDER BY piece, name ASC
 
 
 --get all pieces of a certain medium
 SELECT id, title
 FROM Pieces
-WHERE medium_id == :id_from_dropdown
-ORDER BY Medium, ASC
+WHERE medium_id = 2
 
-
---get all artists' data to populate a dropdown for associating with a medium
-SELECT artist_id AS id, last_name, first_name FROM Artists
---get all mediums to populate a dropdown for associating with artists
-SELECT medium_id AS id, class FROM Mediums
-
+--get all pieces' data to populate a dropdown for associating with a specific medium (search function)
+SELECT Pieces.id, Mediums.id, title AS title, class AS medium
+FROM Pieces
+INNER JOIN Mediums ON Pieces.medium_id = Mediums.id;
+WHERE Mediums.id = :medium_id_from_dropdown
 
 --INSERT
 
@@ -84,7 +82,7 @@ INSERT INTO Shipments (sale_id, shipped, delivered, carrier, tracking) VALUES
 --UPDATE
 
 --associate an artist with a piece (M-to-M relationship addition)
-INSERT INTO Artists_Pieces (artist_id, piece_id) VALUES
+INSERT INTO Pieces_Artists (artist_id, piece_id) VALUES
 (:artist_id_from_dropdown_menu, :piece_id_from_dropdown_menu)
 
 --dis-associate a piece from an artist (M-to-M relationship deletion)
@@ -95,7 +93,6 @@ UPDATE Artists SET last_name = :last_name, first_name = :first_name, address = :
 
 --update piece info
 UPDATE Pieces SET location_id = :location_id_from_dropdown, medium_id = :medium_id_from_dropdown, title = :title, year = :year WHERE id = :piece_id_from_update_form
-
 
 --update location info
 UPDATE Locations SET location = :location, address = :address, city = :city, state = :state_from_dropdown, zip = :zip WHERE id = :location_id_from_update_form
