@@ -44,12 +44,26 @@
             {% endfor %}
         
             <!-- Create our edit/delete buttons -->
-            <td><a href="edit_artist/{{id}}" class="btn btn-default">Edit</a></td>
-            <td><a href="delete_artist/{{id}}" class="btn btn-default">Delete</a></td>
+            <td><a href="edit_artist/{{id}}" <i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="delete_artist/{{id}}" <i class="fa-solid fa-trash"></i></a></td>
         </tr>
         {% endfor %}
         </table>
+
+        </br>
+
     </body>
+
+{% endblock %}
+
+{% block footer %}
+
+    <footer>
+
+        <!-- Needed to setup form at later stage -->
+        <p>Add New Artist<a href="{{ url_for('artist_add') }}" <i class="fa-solid fa-circle-plus"></i></a></p> 
+
+    </footer>
 
 {% endblock %}
 

@@ -26,6 +26,10 @@ def artists():
     db_connection.close()
     return render_template("sc_artists.j2", Artists=results)
 
+@app.route('/artist_add', methods=['GET'])
+def artist_add():
+    return render_template("sc_artist_add.j2")
+
 # Customers CRUD
 
 @app.route('/customers', methods=['GET'])

@@ -10,6 +10,11 @@ body, html {
     width: 400px;
 }
 
+a {
+   text-decoration:none;
+   color: inherit;
+}
+
 table, td, th {
     border: 1px solid #aaa;
 }

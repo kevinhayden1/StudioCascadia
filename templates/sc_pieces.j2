@@ -44,12 +44,22 @@
             {% endfor %}
 
             <!-- Create our edit/delete buttons -->
-            <td><a href="edit_piece/{{id}}" class="btn btn-default">Edit</a></td>
-            <td><a href="delete_piece/{{id}}" class="btn btn-default">Delete</a></td>
+            <td><a href="edit_piece/{{id}}" <i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="delete_piece/{{id}}" <i class="fa-solid fa-trash"></i></a></td>
         </tr>
         {% endfor %}
         </table>
     </body>
+
+{% endblock %}
+
+{% block footer %}
+
+    <footer>
+    
+        <p>Add New Piece<i class="fa-solid fa-circle-plus"></i></p>
+        
+    </footer>
 
 {% endblock %}
 

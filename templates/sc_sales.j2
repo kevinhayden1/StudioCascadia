@@ -44,12 +44,22 @@
             {% endfor %}
 
             <!-- Create our edit/delete buttons -->
-            <td><a href="edit_sale/{{id}}" class="btn btn-default">Edit</a></td>
-            <td><a href="delete_sale/{{id}}" class="btn btn-default">Delete</a></td>
+            <td><a href="edit_sale/{{id}}" <i class="fa-solid fa-pen"></i></a></td>
+            <td><a href="delete_sale/{{id}}" <i class="fa-solid fa-trash"></i></a></td>
         </tr>
         {% endfor %}
         </table>
     </body>
+
+{% endblock %}
+
+{% block footer %}
+
+    <footer>
+    
+        <p>Add New Sale<i class="fa-solid fa-circle-plus"></i></p>
+        
+    </footer>
 
 {% endblock %}
 
