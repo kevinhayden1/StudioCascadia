@@ -2,7 +2,7 @@ SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
 
---Artists
+-- Artists
 CREATE OR REPLACE TABLE Artists
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -66,7 +66,7 @@ VALUES
 );
 
 
---Mediums
+-- Mediums
 CREATE OR REPLACE TABLE Mediums
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -94,7 +94,7 @@ VALUES
 );
 
 
---Locations
+-- Locations
 CREATE OR REPLACE TABLE Locations
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -215,7 +215,7 @@ VALUES
     'Portrait'
 );
 
---Pieces_Artists
+-- Pieces_Artists
 CREATE OR REPLACE TABLE Pieces_Artists
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -250,7 +250,7 @@ VALUES
     3
 );
 
---Customers
+-- Customers
 CREATE OR REPLACE TABLE Customers
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -305,7 +305,87 @@ VALUES
 );
 
 
---Payments
+INSERT INTO Shipments
+(
+    sale_id,
+    shipped,
+    delivered,
+    carrier,
+    tracking
+)
+
+VALUES
+(
+    1,
+    1,
+    1,
+    'Prime Hawaiian Movers',
+    NULL
+),
+(
+    2,
+    1,
+    1,
+    'FedEx',
+    '05218962519602'
+),
+(
+    3,
+    1,
+    1,
+    'FedEx',
+    '05227994632790'
+);
+
+
+-- Sales
+CREATE OR REPLACE TABLE Sales
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    piece_id INT,
+    customer_id INT,
+    date DATETIME NOT NULL,
+    amount DECIMAL NOT NULL,
+    ship TINYINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE,
+    FOREIGN KEY (piece_id) REFERENCES Pieces(id) ON DELETE CASCADE
+);
+
+INSERT INTO Sales
+(
+    customer_id,
+    piece_id,
+    date,
+    amount,
+    ship
+)
+
+VALUES
+(
+    1,
+    1,
+    '2021-10-31 11:05',
+    1300.00,
+    1
+),
+(
+    2,
+    3,
+    '2022-01-23 16:33',
+    8000.00,
+    1
+),
+(
+    3,
+    2,
+    '2022-01-23 10:10',
+    '6000.00',
+    1
+);
+
+
+-- Payments
 CREATE OR REPLACE TABLE Payments
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -376,7 +456,7 @@ VALUES
 );
 
 
---Shipments
+-- Shipments
 CREATE OR REPLACE TABLE Shipments
 (
     id INT NOT NULL AUTO_INCREMENT,
@@ -389,84 +469,6 @@ CREATE OR REPLACE TABLE Shipments
     FOREIGN KEY (sale_id) REFERENCES Sales(id) ON DELETE CASCADE
 );
 
-INSERT INTO Shipments
-(
-    sale_id,
-    shipped,
-    delivered,
-    carrier,
-    tracking
-)
-
-VALUES
-(
-    1,
-    1,
-    1,
-    'Prime Hawaiian Movers',
-    NULL
-),
-(
-    2,
-    1,
-    1,
-    'FedEx',
-    '05218962519602'
-),
-(
-    3,
-    1,
-    1,
-    'FedEx',
-    '05227994632790'
-);
-
-
---Sales
-CREATE OR REPLACE TABLE Sales
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    piece_id INT,
-    customer_id INT,
-    date DATETIME NOT NULL,
-    amount DECIMAL NOT NULL,
-    ship TINYINT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE,
-    FOREIGN KEY (piece_id) REFERENCES Pieces(id) ON DELETE CASCADE
-);
-
-INSERT INTO Sales
-(
-    customer_id,
-    piece_id,
-    date,
-    amount,
-    ship
-)
-
-VALUES
-(
-    1,
-    1,
-    '2021-10-31 11:05',
-    1300.00,
-    1
-),
-(
-    2,
-    3,
-    '2022-01-23 16:33',
-    8000.00,
-    1
-),
-(
-    3,
-    2,
-    '2022-01-23 10:10',
-    '6000.00',
-    1
-);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
