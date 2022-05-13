@@ -90,14 +90,14 @@ def mediums():
     return render_template("sc_mediums.j2", Mediums=results)
 
 ## Add Form
-@app.route('/mediums_add', methods=['GET'])
-def mediums_add():
-    return render_template("sc_mediums_add.j2")
+@app.route('/medium_add', methods=['GET'])
+def medium_add():
+    return render_template("sc_medium_add.j2")
 
 ## Edit Form
-@app.route('/mediums_edit', methods=['GET'])
-def mediums_edit():
-    return render_template("sc_mediums_edit.j2")
+@app.route('/medium_edit', methods=['GET'])
+def medium_edit():
+    return render_template("sc_medium_edit.j2")
 
 # Payments CRUD
 
@@ -111,14 +111,14 @@ def payments():
     return render_template("sc_payments.j2", Payments=results)
 
 ## Add Form
-@app.route('/payments_add', methods=['GET'])
-def payments_add():
-    return render_template("sc_payments_add.j2")
+@app.route('/payment_add', methods=['GET'])
+def payment_add():
+    return render_template("sc_payment_add.j2")
 
 ## Edit Form
-@app.route('/payments_edit', methods=['GET'])
-def payments_edit():
-    return render_template("sc_payments_edit.j2")
+@app.route('/payment_edit', methods=['GET'])
+def payment_edit():
+    return render_template("sc_payment_edit.j2")
 
 # Pieces_Artists CRUD
 
@@ -132,14 +132,14 @@ def pieces_artists():
     return render_template("sc_pieces_artists.j2", Pieces_Artists=results)
 
 ## Add Form
-@app.route('/pieces_artists_add', methods=['GET'])
-def pieces_artists_add():
-    return render_template("sc_pieces_artists_add.j2")
+@app.route('/piece_artist_add', methods=['GET'])
+def piece_artist_add():
+    return render_template("sc_piece_artist_add.j2")
 
 ## Edit Form
-@app.route('/pieces_artists_edit', methods=['GET'])
-def pieces_artists_edit():
-    return render_template("sc_pieces_artists_edit.j2")
+@app.route('/piece_artist_edit', methods=['GET'])
+def piece_artist_edit():
+    return render_template("sc_piece_artist_edit.j2")
 
 # Pieces CRUD
 
@@ -153,14 +153,14 @@ def pieces():
     return render_template("sc_pieces.j2", Pieces=results)
 
 ## Add Form
-@app.route('/pieces_add', methods=['GET'])
-def pieces_add():
-    return render_template("sc_pieces_add.j2")
+@app.route('/piece_add', methods=['GET'])
+def piece_add():
+    return render_template("sc_piece_add.j2")
 
 ## Edit Form
-@app.route('/pieces_edit', methods=['GET'])
-def pieces_edit():
-    return render_template("sc_pieces_edit.j2")
+@app.route('/piece_edit', methods=['GET'])
+def piece_edit():
+    return render_template("sc_piece_edit.j2")
 
 # Sales CRUD
 
@@ -174,14 +174,14 @@ def sales():
     return render_template("sc_sales.j2", Sales=results)
 
 ## Add Form
-@app.route('/sales_add', methods=['GET'])
-def sales_add():
-    return render_template("sc_sales_add.j2")
+@app.route('/sale_add', methods=['GET'])
+def sale_add():
+    return render_template("sc_sale_add.j2")
 
 ## Edit Form
-@app.route('/sales_edit', methods=['GET'])
-def sales_edit():
-    return render_template("sc_sales_edit.j2")
+@app.route('/sale_edit', methods=['GET'])
+def sale_edit():
+    return render_template("sc_sale_edit.j2")
 
 # Shipments CRUD
 
@@ -195,14 +195,14 @@ def shipments():
     return render_template("sc_shipments.j2", Shipments=results)
 
 ## Add Form
-@app.route('/shipments_add', methods=['GET'])
-def shipments_add():
-    return render_template("sc_shipments_add.j2")
+@app.route('/shipment_add', methods=['GET'])
+def shipment_add():
+    return render_template("sc_shipment_add.j2")
 
 ## Edit Form
-@app.route('/shipments_edit', methods=['GET'])
-def shipments_edit():
-    return render_template("sc_shipments_edit.j2")
+@app.route('/shipment_edit', methods=['GET'])
+def shipment_edit():
+    return render_template("sc_shipment_edit.j2")
 
 ### Listener
 

@@ -1,6 +1,143 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET AUTOCOMMIT = 0;
 
+
+--Artists
+CREATE OR REPLACE TABLE Artists
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    last_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip CHAR(5) NOT NULL,
+    phone VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO Artists 
+(
+    last_name,
+    first_name,
+    address,
+    city,
+    state,
+    zip,
+    phone
+)
+
+VALUES
+(
+    'Rindler',
+    'Wolfgang',
+    '800 W Campbell Rd',
+    'Richardson',
+    'TX',
+    '75080',
+    '8008892443'
+),
+(
+    'Chihuly',
+    'Dale',
+    '509 NE Northlake Way',
+    'Seattle',
+    'WA',
+    '98105',
+    '2067818707'
+),
+(
+    'Jackson',
+    'Leslie',
+    '509 NE Northlake Way',
+    'Seattle',
+    'WA',
+    '98105',
+    '2067818707'
+),
+(
+    'Domont',
+    'Jordan',
+    '33 NW Park Ave',
+    'Portland',
+    'OR',
+    '97209',
+    '5034674909'
+);
+
+
+--Mediums
+CREATE OR REPLACE TABLE Mediums
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    class VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO Mediums
+(
+    class
+)
+
+VALUES
+(
+    'Oil'
+),
+(
+    'Mixed'
+),
+(
+    'Glass'
+),
+(
+    'Digital'
+);
+
+
+--Locations
+CREATE OR REPLACE TABLE Locations
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    location VARCHAR(50) NOT NULL,
+    address VARCHAR(50) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    state VARCHAR(50) NOT NULL,
+    zip CHAR(5) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO Locations
+(
+    location,
+    address,
+    city,
+    state,
+    zip
+)
+
+VALUES
+(
+    'Studio Cascadia Seattle',
+    '519 E Pine St',
+    'Seattle',
+    'WA',
+    '98122'
+),
+(
+    'Studio Cascadia Spokane',
+    '1326 E Sprague Ave',
+    'Spokane',
+    'WA',
+    '99202'
+),
+(
+    'Studio Cascadia Portland',
+    '22 SW 3rd Ave',
+    'Portland',
+    'OR',
+    '97204'
+);
+
 -- Pieces
 CREATE OR REPLACE TABLE Pieces 
 (
@@ -78,71 +215,6 @@ VALUES
     'Portrait'
 );
 
-
---Artists
-CREATE OR REPLACE TABLE Artists
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    last_name VARCHAR(50) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    address VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    state VARCHAR(50) NOT NULL,
-    zip CHAR(5) NOT NULL,
-    phone VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-INSERT INTO Artists 
-(
-    last_name,
-    first_name,
-    address,
-    city,
-    state,
-    zip,
-    phone
-)
-
-VALUES
-(
-    'Rindler',
-    'Wolfgang',
-    '800 W Campbell Rd',
-    'Richardson',
-    'TX',
-    '75080',
-    '8008892443'
-),
-(
-    'Chihuly',
-    'Dale',
-    '509 NE Northlake Way',
-    'Seattle',
-    'WA',
-    '98105',
-    '2067818707'
-),
-(
-    'Jackson',
-    'Leslie',
-    '509 NE Northlake Way',
-    'Seattle',
-    'WA',
-    '98105',
-    '2067818707'
-),
-(
-    'Domont',
-    'Jordan',
-    '33 NW Park Ave',
-    'Portland',
-    'OR',
-    '97209',
-    '5034674909'
-);
-
-
 --Pieces_Artists
 CREATE OR REPLACE TABLE Pieces_Artists
 (
@@ -176,79 +248,6 @@ VALUES
 (
     2,
     3
-);
-
-
---Mediums
-CREATE OR REPLACE TABLE Mediums
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    class VARCHAR(50) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-INSERT INTO Mediums
-(
-    class
-)
-
-VALUES
-(
-    'Oil'
-),
-(
-    'Mixed'
-),
-(
-    'Glass'
-),
-(
-    'Digital'
-);
-
-
---Locations
-CREATE OR REPLACE TABLE Locations
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    location VARCHAR(50) NOT NULL,
-    address VARCHAR(50) NOT NULL,
-    city VARCHAR(50) NOT NULL,
-    state VARCHAR(50) NOT NULL,
-    zip CHAR(5) NOT NULL,
-    PRIMARY KEY (id)
-);
-
-INSERT INTO Locations
-(
-    location,
-    address,
-    city,
-    state,
-    zip
-)
-
-VALUES
-(
-    'Studio Cascadia Seattle',
-    '519 E Pine St',
-    'Seattle',
-    'WA',
-    '98122'
-),
-(
-    'Studio Cascadia Spokane',
-    '1326 E Sprague Ave',
-    'Spokane',
-    'WA',
-    '99202'
-),
-(
-    'Studio Cascadia Portland',
-    '22 SW 3rd Ave',
-    'Portland',
-    'OR',
-    '97204'
 );
 
 --Customers
@@ -303,53 +302,6 @@ VALUES
     'WA',
     '98040',
     '555-545-2222'
-);
-
-
---Sales
-CREATE OR REPLACE TABLE Sales
-(
-    id INT NOT NULL AUTO_INCREMENT,
-    piece_id INT,
-    customer_id INT,
-    date DATETIME NOT NULL,
-    amount DECIMAL NOT NULL,
-    ship TINYINT NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE,
-    FOREIGN KEY (piece_id) REFERENCES Pieces(id) ON DELETE CASCADE
-);
-
-INSERT INTO Sales
-(
-    customer_id,
-    piece_id,
-    date,
-    amount,
-    ship
-)
-
-VALUES
-(
-    1,
-    1,
-    '2021-10-31 11:05',
-    1300.00,
-    1
-),
-(
-    2,
-    3,
-    '2022-01-23 16:33',
-    8000.00,
-    1
-),
-(
-    3,
-    2,
-    '2022-01-23 10:10',
-    '6000.00',
-    1
 );
 
 
@@ -467,6 +419,53 @@ VALUES
     1,
     'FedEx',
     '05227994632790'
+);
+
+
+--Sales
+CREATE OR REPLACE TABLE Sales
+(
+    id INT NOT NULL AUTO_INCREMENT,
+    piece_id INT,
+    customer_id INT,
+    date DATETIME NOT NULL,
+    amount DECIMAL NOT NULL,
+    ship TINYINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (customer_id) REFERENCES Customers(id) ON DELETE CASCADE,
+    FOREIGN KEY (piece_id) REFERENCES Pieces(id) ON DELETE CASCADE
+);
+
+INSERT INTO Sales
+(
+    customer_id,
+    piece_id,
+    date,
+    amount,
+    ship
+)
+
+VALUES
+(
+    1,
+    1,
+    '2021-10-31 11:05',
+    1300.00,
+    1
+),
+(
+    2,
+    3,
+    '2022-01-23 16:33',
+    8000.00,
+    1
+),
+(
+    3,
+    2,
+    '2022-01-23 10:10',
+    '6000.00',
+    1
 );
 
 SET FOREIGN_KEY_CHECKS=1;
