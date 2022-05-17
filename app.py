@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, redirect
+from flask import Flask, render_template, json, redirect, request
 import os
 import database.db_connector as db
 
@@ -32,9 +32,44 @@ def artist_add():
     return render_template("sc_artist_add.j2")
 
 ## Edit Form
-@app.route('/artist_edit', methods=['GET'])
-def artist_edit():
-    return render_template("sc_artist_edit.j2")
+# @app.route('/artist_edit', methods=['GET'])
+# def artist_edit():
+#     return render_template("sc_artist_edit.j2")
+
+# Edit Artist
+
+@app.route("/artist_edit/<int:id>", methods=["POST", "GET"])
+def artist_edit(id):
+    if request.method == "GET":
+        # mySQL query to grab the info of the person with our passed id
+        query = "SELECT * FROM Artists WHERE id = %s" % (id)
+        cursor = db_connection.cursor()
+        cursor.execute(query)
+        data = cursor.fetchall()
+
+        # mySQL query to grab data for dropdowns
+        query2 = "SELECT id FROM Artists"
+        cursor = db_connection.cursor()
+        cursor.execute(query2)
+        artist_data = cursor.fetchall()
+
+        # render artist_edit page passing our query data and artist data to the artist_edit template
+        return render_template("sc_artist_edit.j2", data=data, artists=artist_data)
+
+    if request.method == "POST":
+        if request.form.get("artist_edit"):
+            #grab user form inputs
+            id = request.form["id"]
+            lname = request.form["last_name"]
+            fname = request.form["first_name"]
+            address = request.form["address"]
+            city = request.form["city"]
+            state = request.form["state"]
+            zip = request.form["zip"]
+            phone = request.form["phone"]
+        
+        return redirect("/artists")
+
 
 # Delete Artist
 @app.route("/artist_delete/<int:id>")
