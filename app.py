@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json
+from flask import Flask, render_template, json, redirect
 import os
 import database.db_connector as db
 
@@ -21,7 +21,7 @@ def root():
 def artists():
     db_connection = db.connect_to_database()
     query = "SELECT * FROM Artists;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)  # !!!!!!!!!!!!!!!!!! CAUSES DB BREAK
+    cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     db_connection.close()
     return render_template("sc_artists.j2", Artists=results)
@@ -35,6 +35,18 @@ def artist_add():
 @app.route('/artist_edit', methods=['GET'])
 def artist_edit():
     return render_template("sc_artist_edit.j2")
+
+# Delete Artist
+@app.route("/artist_delete/<int:id>")
+def artist_delete(id):
+    db_connection = db.connect_to_database()
+    query = "DELETE FROM Artists WHERE id = '%s';"
+    cursor = db_connection.cursor()
+    cursor.execute(query, (id,))
+    db_connection.commit()
+
+    # redirect
+    return redirect("/artists")
 
 # Customers CRUD
 
