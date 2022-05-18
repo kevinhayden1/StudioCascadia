@@ -9,13 +9,17 @@
 
 {% block body %}
 
+<div style="text-align: center;">
+<div style="display: inline-block; text-align: left;">
+
+
 <h3>Pieces Management</h3>
 <h4>Add a Piece</h4>
 
 <form>
 
     <div class="form-group row">
-        <label for="inputEmail3" class="col-sm-2 col-form-label">Location ID</label>
+        <label for="inputPiece" class="col-sm-2 col-form-label">Location ID</label>
         <div class="col-sm-10">
        <select>
             <option value="1">1</option>
@@ -35,7 +39,7 @@
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Medium ID</label>
+        <label for="inputMediumID2" class="col-sm-2 col-form-label">Medium ID</label>
         <div class="col-sm-10">
        <select>
             <option value="1">1</option>
@@ -55,34 +59,34 @@
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Title</label>
+        <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
         <div class="col-sm-10">
-        <input type="name" class="form-control" id="inputPassword3" placeholder="Title">
+        <input type="text" class="form-control" id="inputTitle" placeholder="Title">
         </div>
     </div>
     
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Year</label>
+        <label for="inputYear" class="col-sm-2 col-form-label">Year</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPassword3" placeholder="Year">
+        <input type="number" class="form-control" id="inputYear" placeholder="Year">
         </div>
     </div>
     
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Price</label>
+        <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPassword3" placeholder="Price">
+        <input type="number" class="form-control" id="inputPrice" placeholder="Price">
         </div>
     </div>
     
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Available</label>
+        <label for="inputAvailable" class="col-sm-2 col-form-label">Available</label>
         <div class="col-sm-10">
         <select>
             <option value="1">Yes</option>
@@ -94,7 +98,7 @@
     </br>
 
     <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Hold</label>
+        <label for="inputHold" class="col-sm-2 col-form-label">Hold</label>
         <div class="col-sm-10">
         <select>
             <option value="0">No</option>
@@ -105,7 +109,7 @@
     
     </br>
         <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Commission</label>
+        <label for="inputCommission" class="col-sm-2 col-form-label">Commission</label>
         <div class="col-sm-10">
         <select>
             <option value="0">No</option>
@@ -116,9 +120,9 @@
 
     </br>
         <div class="form-group row">
-        <label for="inputPassword3" class="col-sm-2 col-form-label">Style</label>
+        <label for="inputStyle" class="col-sm-2 col-form-label">Style</label>
         <div class="col-sm-10">
-        <input type="name" class="form-control" id="inputPassword3" placeholder="Style">
+        <input type="inputStyle" class="form-control" id="inputStyle" placeholder="Style">
         </div>
     </div>
     
@@ -177,3 +181,6 @@
 {% endblock %}
 
 </html>
+
+</div>
+</div>

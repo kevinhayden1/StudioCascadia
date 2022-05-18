@@ -51,6 +51,8 @@ td {
 
 .form {
     margin-top: 20px;
+    width: 50%;
+    margin-left : 25%
 }
 
 #content {

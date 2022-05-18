@@ -10,31 +10,33 @@
 
 {% block body %}
 
+<div style="text-align: center;">
+<div style="display: inline-block; text-align: left;">
+
+
 <h3>Payment Management</h3>
-<h4>Add a New Payment</h4>
+<h4>Edit Payment</h4>
 
 
 
 <form>
 
     <div class="form-group row">
-        <label for="inputSaleId" class="col-sm-2 col-form-label">Sale ID</label>
+        <label for="inputSaleID" class="col-sm-2 col-form-label">Sale ID</label>
         <select id="saleid" name="saleid">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
         </select>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputSaleId" placeholder="Sale ID">
         </div>
     </div>
     
     </br>
 
     <div class="form-group row">
-        <label for="inputDate1 class="col-sm-2 col-form-label">Date</label>
-        <div class="col-sm-10">
-        <input type="date" class="form-control" id="inputDate1" placeholder="XXXX-XX-XX XX:XX">
+        <label for="inputDate" class="col-sm-2 col-form-label">Date</label><div class="col-sm-10">
+        <input type="date" class="form-control" id="inputDate" placeholder="XXXX-XX-XX XX:XX">
         </div>
     </div>
     
@@ -42,12 +44,11 @@
 
     <div class="form-group row">
         <label for="inputCard" class="col-sm-2 col-form-label">Card</label>
-        <select id="inputCard" name="card">
+        <select id="card" name="card">
             <option value="0">0</option>
             <option value="1">1</option>
         </select>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputCard" placeholder="Card">
         </div>
     </div>
     
@@ -55,24 +56,22 @@
 
     <div class="form-group row">
         <label for="inputCash" class="col-sm-2 col-form-label">Cash</label>
-        <select id="inputCash" name="Cash">
+        <select id="cars" name="cars">
             <option value="0">0</option>
             <option value="1">1</option>
         </select>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputCash" placeholder="cash">
         </div>
     </div>
     
     </br>
     <div class="form-group row">
         <label for="inputCheck" class="col-sm-2 col-form-label">Check</label>
-        <select id="inputCheck" name="check">
+        <select id="check" name="check">
             <option value="0">0</option>
             <option value="1">1</option>
         </select>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputCheck" placeholder="check">
         </div>
     </div>
     
@@ -94,6 +93,8 @@
         <input type="date" class="form-control" id="inputExpDate" placeholder="Expiration Date">
         </div>
     </div>
+
+    </br>
 
     <div class="form-group row">
         <label for="inputAmount" class="col-sm-2 col-form-label">Amount</label>
@@ -156,5 +157,8 @@
 </form>
 
 {% endblock %}
+
+</div>
+</div>
 
 </html>
