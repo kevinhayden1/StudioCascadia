@@ -9,8 +9,12 @@
 
 {% block body %}
 
+<div style="text-align: center;">
+<div style="display: inline-block; text-align: left;">
+
+
 <h3>Customer Management</h3>
-<h4>Edit Customer</h4>
+<h4>Add a New Customer</h4>
 
 <form>
 
@@ -105,7 +109,7 @@
             <option value="WI">WI</option>	
             <option value="WV">WV</option>
             <option value="WY">WY</option>
-        </select>
+        </select>	
         </div>
     </div>
     
@@ -117,6 +121,8 @@
         <input type="number" class="form-control" id="inputZipCode2" placeholder="Zip Code">
         </div>
     </div>
+
+    </br>
 
     <div class="form-group row">
         <label for="inputPhone2" class="col-sm-2 col-form-label">Phone</label>
@@ -178,5 +184,8 @@
 </form>
 
 {% endblock %}
+
+</div>
+</div>
 
 </html>
