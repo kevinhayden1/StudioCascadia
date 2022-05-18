@@ -41,6 +41,8 @@ def artist_add():
 @app.route("/artist_edit/<int:id>", methods=["POST", "GET"])
 def artist_edit(id):
     if request.method == "GET":
+        db_connection = db.connect_to_database()
+
         # mySQL query to grab the info of the person with our passed id
         query = "SELECT * FROM Artists WHERE id = %s" % (id)
         cursor = db_connection.cursor()
@@ -53,11 +55,16 @@ def artist_edit(id):
         cursor.execute(query2)
         artist_data = cursor.fetchall()
 
+        db_connection.close()
+
         # render artist_edit page passing our query data and artist data to the artist_edit template
         return render_template("sc_artist_edit.j2", data=data, artists=artist_data)
 
     if request.method == "POST":
         if request.form.get("artist_edit"):
+
+            db_connection = db.connect_to_database()
+
             #grab user form inputs
             id = request.form["id"]
             lname = request.form["last_name"]
@@ -67,6 +74,13 @@ def artist_edit(id):
             state = request.form["state"]
             zip = request.form["zip"]
             phone = request.form["phone"]
+
+            query3 = "UPDATE Artists SET id = %s, lname = %s, fname = %s, address = %s, city = %s, state = %s, zip = %s, phone=%s WHERE Artists.id = %s"
+            cur = db_connection.cursor()
+            cur.execute(query, (id, lname, fname, address, city, state, zip, phone))
+            db_connection.commit()
+
+            db_connection.close()
         
         return redirect("/artists")
 
@@ -254,5 +268,5 @@ def shipment_edit():
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 4934))
+    port = int(os.environ.get('PORT', 4937))
     app.run(port=port, debug=True)
