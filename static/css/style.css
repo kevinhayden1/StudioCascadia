@@ -1,6 +1,7 @@
 
+
 body, html {
-    color: #f2f2f2;
+    color: #8b8585;
     margin: 0;
     font-family: sans-serif;
     background-color: #ffffff;
@@ -11,13 +12,27 @@ body, html {
     width: 400px;
 }
 
+h1 {
+    color: #827d7d;
+}
+
+h3 {
+    color: #827d7d;
+}
+
 a {
    text-decoration:none;
    color: inherit;
+   text-align: center;
+}
+
+p {
+    text-align: center;
 }
 
 table, td, th {
     border: 1px solid #aaa;
+    text-align: center
 }
 
 table {
