@@ -13,14 +13,14 @@
 <div style="display: inline-block; text-align: left;">
 
 <h3>Artist Management</h3>
-<h4>Add a New Artist</h4>
+<h4>Edit Artist</h4>
 
-<form>
+<form id="editArtist" action="/artist_edit" method="post">
 
     <div class="form-group row">
         <label for="inputLastName1" class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLastName1" placeholder="Last Name">
+        <input type="text" class="form-control" id="inputLastName1" name="last_name" placeholder="Last Name">
         </div>
     </div>
     
@@ -29,7 +29,7 @@
     <div class="form-group row">
         <label for="inputFirstName1" class="col-sm-2 col-form-label">First name</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputFirstName1" placeholder="First Name">
+        <input type="text" class="form-control" id="inputFirstName1" name="first_name" placeholder="First Name">
         </div>
     </div>
     
@@ -38,7 +38,7 @@
     <div class="form-group row">
         <label for="inputAddress1" class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputAddress1" placeholder="Address">
+        <input type="text" class="form-control" id="inputAddress1" name="address" placeholder="Address">
         </div>
     </div>
     
@@ -47,7 +47,7 @@
     <div class="form-group row">
         <label for="inputCity1" class="col-sm-2 col-form-label">City</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputCity1" placeholder="City">
+        <input type="text" class="form-control" id="inputCity1" name="city" placeholder="City">
         </div>
     </div>
     
@@ -56,7 +56,7 @@
     <div class="form-group row">
         <label for="inputState1" class="col-sm-2 col-form-label">State</label>			
         <div class="col-sm-10">
-        <select>
+        <select name="state">
             <option value="AL">AL</option>
             <option value="AK">AK</option>
             <option value="AR">AR</option>	
@@ -117,7 +117,7 @@
     <div class="form-group row">
         <label for="inputZipCode1" class="col-sm-2 col-form-label">Zip Code</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputZipCode1" placeholder="Zip Code">
+        <input type="number" class="form-control" id="inputZipCode1" name="zip" placeholder="Zip Code">
         </div>
     </div>
 
@@ -126,39 +126,11 @@
     <div class="form-group row">
         <label for="inputPhone1" class="col-sm-2 col-form-label">Phone</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPhone1" placeholder="Phone">
+        <input type="number" class="form-control" id="inputPhone1" name="phone" placeholder="Phone">
         </div>
     </div>
     
     </br>
-
-    <!--
-    <fieldset class="form-group">
-        <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-        <div class="col-sm-10">
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-            <label class="form-check-label" for="gridRadios1">
-                First radio
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-            <label class="form-check-label" for="gridRadios2">
-                Second radio
-            </label>
-            </div>
-            <div class="form-check disabled">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-            <label class="form-check-label" for="gridRadios3">
-                Third disabled radio
-            </label>
-            </div>
-        </div>
-        </div>
-    </fieldset>
-    -->
 
     <div class="form-group row">
         <div class="col-sm-2">Verify Data</div>
@@ -176,7 +148,7 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-        <form action="artist_delete/{{id}}" method="POST"><button name="foo" value="upvote">Submit</button></form>
+        <button type="submit"  name="_artist" value="edit_artist" class="btn btn-primary">Submit</button>
         </div>
     </div>
 

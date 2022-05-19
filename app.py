@@ -1,4 +1,4 @@
-from flask import Flask, render_template, json, redirect, request
+from flask import Flask, render_template, json, redirect, request, url_for
 import os
 import database.db_connector as db
 
@@ -17,24 +17,41 @@ def root():
 
 # Artists CRUD
 
-@app.route('/artists', methods=['GET'])
+@app.route('/artists', methods=["POST", "GET"])
 def artists():
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM Artists;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    db_connection.close()
-    return render_template("sc_artists.j2", Artists=results)
+    if request.method == "GET":
+        db_connection = db.connect_to_database()
+        query = "SELECT * FROM Artists;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        db_connection.close()
+        return render_template("sc_artists.j2", Artists=results)
 
-## Add Form
-@app.route('/artist_add', methods=['GET'])
+@app.route('/artist_add', methods=["POST", "GET"])
 def artist_add():
-    return render_template("sc_artist_add.j2")
+    if request.method == "POST":
+        if request.form.get("add_artist"):
+            #grab user form inputs
+            print("Here")
+            lname = request.form["last_name"]
+            fname = request.form["first_name"]
+            address = request.form["address"]
+            city = request.form["city"]
+            state = request.form["state"]
+            zip = request.form["zip"]
+            phone = request.form["phone"]
+            print(lname)
+            db_connection = db.connect_to_database()
+            query = "INSERT INTO Artists (last_name, first_name, address, city, state, zip, phone) VALUES (%s, %s, %s, %s, %s, %s, %s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (lname, fname, address, city, state, zip, phone))
+            results = cursor.fetchall()
+            print(results)
+            db_connection.commit()
+            db_connection.close()
+        return redirect(url_for("artists"))
 
-## Edit Form
-# @app.route('/artist_edit', methods=['GET'])
-# def artist_edit():
-#     return render_template("sc_artist_edit.j2")
+    if request.method == "GET":
+        return render_template("sc_artist_add.j2")
 
 # Edit Artist
 
@@ -50,7 +67,7 @@ def artist_edit(id):
         data = cursor.fetchall()
 
         # mySQL query to grab data for dropdowns
-        query2 = "SELECT id FROM Artists"
+        query2 = "SELECT id, last_name FROM Artists"
         cursor = db_connection.cursor()
         cursor.execute(query2)
         artist_data = cursor.fetchall()
@@ -75,14 +92,13 @@ def artist_edit(id):
             zip = request.form["zip"]
             phone = request.form["phone"]
 
-            query3 = "UPDATE Artists SET id = %s, lname = %s, fname = %s, address = %s, city = %s, state = %s, zip = %s, phone=%s WHERE Artists.id = %s"
+            query = "UPDATE Artists SET id = %s, last_name = %s, first_name = %s, address = %s, city = %s, state = %s, zip = %s, phone=%s WHERE Artists.id = %s"
             cur = db_connection.cursor()
             cur.execute(query, (id, lname, fname, address, city, state, zip, phone))
             db_connection.commit()
-
             db_connection.close()
         
-        return redirect("/artists")
+            return redirect("/artists")
 
 
 # Delete Artist
