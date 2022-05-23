@@ -15,12 +15,19 @@
 <h3>Artist Management</h3>
 <h4>Edit Artist</h4>
 
-<form id="editArtist" action="/artist_edit" method="post">
+<form id="ArtistEdit" action="/artist_edit" method="post">
+
+    <div class="form-group row">
+        <label for="inputid" class="col-sm-2 col-form-label">ID</label>
+        <div class="col-sm-10">
+        <input type="text" value="1" class="form-control" id="inputLastName1" name="id" placeholder="id">
+        </div>
+    </div>
 
     <div class="form-group row">
         <label for="inputLastName1" class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLastName1" name="last_name" placeholder="Last Name">
+        <input type="text" value="Last" class="form-control" id="inputLastName1" name="last_name" placeholder="Last Name">
         </div>
     </div>
     
@@ -29,7 +36,7 @@
     <div class="form-group row">
         <label for="inputFirstName1" class="col-sm-2 col-form-label">First name</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputFirstName1" name="first_name" placeholder="First Name">
+        <input type="text" value="First" class="form-control" id="inputFirstName1" name="first_name" placeholder="First Name">
         </div>
     </div>
     
@@ -38,7 +45,7 @@
     <div class="form-group row">
         <label for="inputAddress1" class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputAddress1" name="address" placeholder="Address">
+        <input type="text" value="123 Evergreen" class="form-control" id="inputAddress1" name="address" placeholder="Address">
         </div>
     </div>
     
@@ -47,7 +54,7 @@
     <div class="form-group row">
         <label for="inputCity1" class="col-sm-2 col-form-label">City</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputCity1" name="city" placeholder="City">
+        <input type="text" value="Birmingham" class="form-control" id="inputCity1" name="city" placeholder="City">
         </div>
     </div>
     
@@ -117,7 +124,7 @@
     <div class="form-group row">
         <label for="inputZipCode1" class="col-sm-2 col-form-label">Zip Code</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputZipCode1" name="zip" placeholder="Zip Code">
+        <input type="number" value="97000" class="form-control" id="inputZipCode1" name="zip" placeholder="Zip Code">
         </div>
     </div>
 
@@ -126,7 +133,7 @@
     <div class="form-group row">
         <label for="inputPhone1" class="col-sm-2 col-form-label">Phone</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPhone1" name="phone" placeholder="Phone">
+        <input type="number" value="1234567890" class="form-control" id="inputPhone1" name="phone" placeholder="Phone">
         </div>
     </div>
     
@@ -148,7 +155,7 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-        <button type="submit"  name="_artist" value="edit_artist" class="btn btn-primary">Submit</button>
+        <button type="submit"  name="edit_artist" value="edit_artist" class="btn btn-primary">Submit</button>
         </div>
     </div>
 
