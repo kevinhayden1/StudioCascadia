@@ -17,12 +17,12 @@
 <h3>Location Management</h3>
 <h4>Add a New Location</h4>
 
-<form>
+<form id="insertLocation" action="/location_add" method="post">
 
     <div class="form-group row">
         <label for="inputLocation" class="col-sm-2 col-form-label">Location</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLocation" placeholder="Location Name">
+        <input type="text" class="form-control" id="inputLocation" name="location" placeholder="Location Name">
         </div>
     </div>
     
@@ -31,7 +31,7 @@
     <div class="form-group row">
         <label for="inputAddress4" class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputAddress4" placeholder="Address">
+        <input type="text" class="form-control" id="inputAddress4" name="address" placeholder="Address">
         </div>
     </div>
     
@@ -40,7 +40,7 @@
     <div class="form-group row">
         <label for="inputCity4" class="col-sm-2 col-form-label">City</label>
         <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputCity4" placeholder="City">
+        <input type="text" class="form-control" id="inputCity4" name="city" placeholder="City">
         </div>
     </div>
     
@@ -49,7 +49,7 @@
     <div class="form-group row">
         <label for="inputState4" class="col-sm-2 col-form-label">State</label>
         <div class="col-sm-10">
-        <select>
+        <select name="state">
             <option value="AL">AL</option>
             <option value="AK">AK</option>
             <option value="AR">AR</option>	
@@ -110,48 +110,7 @@
     <div class="form-group row">
         <label for="inputZipCode4" class="col-sm-2 col-form-label">Zip Code</label>
         <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputZipCode4" placeholder="Zip Code">
-        </div>
-    </div>
-    </br>
-
-    <!--
-    <fieldset class="form-group">
-        <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-        <div class="col-sm-10">
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-            <label class="form-check-label" for="gridRadios1">
-                First radio
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-            <label class="form-check-label" for="gridRadios2">
-                Second radio
-            </label>
-            </div>
-            <div class="form-check disabled">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-            <label class="form-check-label" for="gridRadios3">
-                Third disabled radio
-            </label>
-            </div>
-        </div>
-        </div>
-    </fieldset>
-    -->
-
-    <div class="form-group row">
-        <div class="col-sm-2">Verify Data</div>
-        <div class="col-sm-10">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck1">
-            <label class="form-check-label" for="gridCheck1">
-            Verified
-            </label>
-        </div>
+        <input type="number" class="form-control" id="inputZipCode4" name="zip" placeholder="Zip Code">
         </div>
     </div>
 
@@ -159,7 +118,7 @@
 
     <div class="form-group row">
         <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit"  name="add_location" value="add_location" class="btn btn-primary">Submit</button>
         </div>
     </div>
 
