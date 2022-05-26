@@ -233,10 +233,10 @@ def medium_add():
     if request.method == "POST":
         if request.form.get("add_medium"):
             #grab user form inputs
-            media = request.form["media"]
+            medium = request.form["medium"]
             db_connection = db.connect_to_database()
-            query = "INSERT INTO Mediums (media) VALUES (%s);"
-            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (media))
+            query = "INSERT INTO Mediums (medium) VALUES (%s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (medium))
             results = cursor.fetchall()
             db_connection.commit()
             db_connection.close()
@@ -531,5 +531,5 @@ def shipment_delete(id):
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 4931))
+    port = int(os.environ.get('PORT', 4934))
     app.run(port=port, debug=True)

@@ -70,13 +70,13 @@ VALUES
 CREATE OR REPLACE TABLE Mediums
 (
     id INT NOT NULL AUTO_INCREMENT,
-    class VARCHAR(50) NOT NULL,
+    medium VARCHAR(50) NOT NULL,
     PRIMARY KEY (id)
 );
 
 INSERT INTO Mediums
 (
-    class
+    medium
 )
 
 VALUES
