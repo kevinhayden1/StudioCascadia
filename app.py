@@ -54,29 +54,30 @@ def artist_add():
 
 # Edit Artist
 
-@app.route("/artist_edit", methods=["POST", "GET"])
-def artist_edit():
+@app.route("/artist_edit/<int:id>", methods=["POST", "GET"])
+def artist_edit(id):
     if request.method == "GET":
         print("Edit GET")
+        print(id)
         db_connection = db.connect_to_database()
 
         # mySQL query to grab the info of the person with our passed id
-        # query = "SELECT * FROM Artists WHERE id = %s" % (id)
-        # cursor = db_connection.cursor()
-        # cursor.execute(query)
-        # data = cursor.fetchall()
+        query = "SELECT * FROM Artists WHERE id = %s"
+        cursor = db_connection.cursor()
+        cursor.execute(query, (id,))
+        data = cursor.fetchall()
 
         # # mySQL query to grab data for dropdowns
-        # query2 = "SELECT id, last_name FROM Artists"
-        # cursor = db_connection.cursor()
-        # cursor.execute(query2)
-        # artist_data = cursor.fetchall()
+        query2 = "SELECT id, last_name FROM Artists"
+        cursor = db_connection.cursor()
+        cursor.execute(query2)
+        artist_data = cursor.fetchall()
 
         db_connection.close()
 
         # render artist_edit page passing our query data and artist data to the artist_edit template
-        # return render_template("sc_artist_edit.j2", data=data, artists=artist_data)
-        return render_template("sc_artist_edit.j2")
+        return render_template("sc_artist_edit.j2", data=data, artists=artist_data)
+        #  return render_template("sc_artist_edit.j2")
 
     if request.method == "POST":
         if request.form.get("edit_artist"):
