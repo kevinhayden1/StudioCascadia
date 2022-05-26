@@ -228,17 +228,17 @@ def mediums():
 # Add Medium
 @app.route('/medium_add', methods=["POST", "GET"])
 def medium_add():
-    # if request.method == "POST":
-    #     if request.form.get("add_medium"):
-    #         #grab user form inputs
-    #         media = request.form["media"]
-    #         db_connection = db.connect_to_database()
-    #         query = "INSERT INTO Mediums (media) VALUES (%s);"
-    #         cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (media))
-    #         results = cursor.fetchall()
-    #         db_connection.commit()
-    #         db_connection.close()
-    #     return redirect(url_for("mediums"))
+    if request.method == "POST":
+        if request.form.get("add_medium"):
+            #grab user form inputs
+            media = request.form["media"]
+            db_connection = db.connect_to_database()
+            query = "INSERT INTO Mediums (media) VALUES (%s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (media))
+            results = cursor.fetchall()
+            db_connection.commit()
+            db_connection.close()
+        return redirect(url_for("mediums"))
 
     if request.method == "GET":
         return render_template("sc_medium_add.j2")
@@ -375,6 +375,8 @@ def piece_add():
     if request.method == "POST":
         if request.form.get("add_piece"):
             #grab user form inputs
+            location_id = request.form["location_id"]
+            medium_id = request.form["medium_id"]
             title = request.form["title"]
             year = request.form["year"]
             price = request.form["price"]
@@ -383,8 +385,8 @@ def piece_add():
             commission = request.form["commission"]
             style = request.form["style"]
             db_connection = db.connect_to_database()
-            query = "INSERT INTO Pieces (title, year, price, available, hold, commission, style) VALUES (%s, %s, %s, %s, %s, %s, %s);"
-            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (title, year, price, available, hold, commission, style))
+            query = "INSERT INTO Pieces (location_id, medium_id, title, year, price, available, hold, commission, style) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (location_id, medium_id, title, year, price, available, hold, commission, style))
             results = cursor.fetchall()
             db_connection.commit()
             db_connection.close()
@@ -427,12 +429,14 @@ def sale_add():
     if request.method == "POST":
         if request.form.get("add_sale"):
             #grab user form inputs
+            piece_id = request.form["piece_id"]
+            customer_id = request.form["customer_id"]
             date = request.form["date"]
             amount = request.form["amount"]
             ship = request.form["ship"]
             db_connection = db.connect_to_database()
-            query = "INSERT INTO Sales (date, amount, ship) VALUES (%s, %s, %s);"
-            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (date, amount, ship))
+            query = "INSERT INTO Sales (piece_id, customer_id, date, amount, ship) VALUES (%s, %s, %s, %s, %s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (piece_id, customer_id, date, amount, ship))
             results = cursor.fetchall()
             db_connection.commit()
             db_connection.close()
