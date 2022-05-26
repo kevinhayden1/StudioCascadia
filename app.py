@@ -276,36 +276,37 @@ def payments():
 ## Add Form
 @app.route('/payment_add', methods=["POST", "GET"])
 def payment_add():
-    # if request.method == "POST":
-    #     if request.form.get("add_payment"):
-    #         #grab user form inputs
-    #         date = request.form["date"]
-    #         card = request.form["card"]
-    #         cash = request.form["cash"]
-    #         check = request.form["check"]
-    #         card_number = request.form["card_number"]
-    #         exp_date = request.form["exp_date"]
-    #         amount = request.form["amount"]
+    if request.method == "POST":
+        if request.form.get("add_payment"):
+    #       #grab user form inputs
+            sale_id = request.form["sale_id"]
+            date = request.form["date"]
+            card = request.form["card"]
+            cash = request.form["cash"]
+            check = request.form["check"]
+            card_number = request.form["card_number"]
+            exp_date = request.form["exp_date"]
+            amount = request.form["amount"]
 
     #         # null card_number and exp_date
-    #         if card_number == "" and exp_date == "":
-    #             db_connection = db.connect_to_database()
-    #             query = "INSERT INTO Payments (date, card, cash, check, amount) VALUES (%s, %s, %s, %s, %s);"
-    #             cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (date, card, cash, check, amount))
-    #             results = cursor.fetchall()
-    #             db_connection.commit()
-    #             db_connection.close()
+            if card_number == "" or exp_date == "":
+                db_connection = db.connect_to_database()
+                query = "INSERT INTO Payments (sale_id, `date`, `card`, cash, `check`, amount) VALUES (%s, %s, %s, %s, %s, %s);"
+                cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (sale_id, date, card, cash, check, amount))
+                results = cursor.fetchall()
+                db_connection.commit()
+                db_connection.close()
 
     #         # no null inputs
-    #         else:
-    #             db_connection = db.connect_to_database()
-    #             query = "INSERT INTO Payments (date, card, cash, check, card_number, exp_date, amount) VALUES (%s, %s, %s, %s, %s, %s, %s);"
-    #             cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (date, card, cash, check, card_number, exp_date, amount))
-    #             results = cursor.fetchall()
-    #             db_connection.commit()
-    #             db_connection.close()
+            else:
+                db_connection = db.connect_to_database()
+                query = "INSERT INTO Payments (sale_id, `date`, `card`, cash, `check`, card_number, exp_date, amount) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
+                cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (sale_id, date, card, cash, check, card_number, exp_date, amount))
+                results = cursor.fetchall()
+                db_connection.commit()
+                db_connection.close()
 
-    #     return redirect(url_for("payments"))
+        return redirect(url_for("payments"))
 
     if request.method == "GET":
         return render_template("sc_payment_add.j2")
@@ -478,33 +479,34 @@ def shipments():
 # Add Shipment
 @app.route('/shipment_add', methods=["POST", "GET"])
 def shipment_add():
-    # if request.method == "POST":
-    #     if request.form.get("add_shipment"):
-    #         #grab user form inputs
-    #         shipped = request.form["shipped"]
-    #         delivered = request.form["delivered"]
-    #         carrier = request.form["carrier"]
-    #         tracking = request.form["tracking"]
+    if request.method == "POST":
+        if request.form.get("add_shipment"):
+            #grab user form inputs
+            sale_id = request.form["sale_id"]
+            shipped = request.form["shipped"]
+            delivered = request.form["delivered"]
+            carrier = request.form["carrier"]
+            tracking = request.form["tracking"]
 
-    #         # null card_number and exp_date
-    #         if tracking == "":
-    #             db_connection = db.connect_to_database()
-    #             query = "INSERT INTO Shipments (shipped, delivered, carrier) VALUES (%s, %s, %s);"
-    #             cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (shipped, delivered, carrier))
-    #             results = cursor.fetchall()
-    #             db_connection.commit()
-    #             db_connection.close()
+            # null card_number and exp_date
+            if tracking == "":
+                db_connection = db.connect_to_database()
+                query = "INSERT INTO Shipments (sale_id, shipped, delivered, carrier) VALUES (%s, %s, %s, %s);"
+                cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (sale_id, shipped, delivered, carrier))
+                results = cursor.fetchall()
+                db_connection.commit()
+                db_connection.close()
 
-    #         # no null inputs
-    #         else:
-    #             db_connection = db.connect_to_database()
-    #             query = "INSERT INTO Payments (shipped, delivered, carrier, tracking) VALUES (%s, %s, %s, %s);"
-    #             cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (shipped, delivered, carrier, tracking))
-    #             results = cursor.fetchall()
-    #             db_connection.commit()
-    #             db_connection.close()
+             # no null inputs
+            else:
+                db_connection = db.connect_to_database()
+                query = "INSERT INTO Shipments (sale_id, shipped, delivered, carrier, tracking) VALUES (%s, %s, %s, %s, %s);"
+                cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (sale_id, shipped, delivered, carrier, tracking))
+                results = cursor.fetchall()
+                db_connection.commit()
+                db_connection.close()
 
-    #     return redirect(url_for("shipments"))
+        return redirect(url_for("shipments"))
 
     if request.method == "GET":
         return render_template("sc_shipment_add.j2")
@@ -529,5 +531,5 @@ def shipment_delete(id):
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 4938))
+    port = int(os.environ.get('PORT', 4931))
     app.run(port=port, debug=True)

@@ -305,38 +305,6 @@ VALUES
 );
 
 
-INSERT INTO Shipments
-(
-    sale_id,
-    shipped,
-    delivered,
-    carrier,
-    tracking
-)
-
-VALUES
-(
-    1,
-    1,
-    1,
-    'Prime Hawaiian Movers',
-    NULL
-),
-(
-    2,
-    1,
-    1,
-    'FedEx',
-    '05218962519602'
-),
-(
-    3,
-    1,
-    1,
-    'FedEx',
-    '05227994632790'
-);
-
 
 -- Sales
 CREATE OR REPLACE TABLE Sales
@@ -469,6 +437,37 @@ CREATE OR REPLACE TABLE Shipments
     FOREIGN KEY (sale_id) REFERENCES Sales(id) ON DELETE CASCADE
 );
 
+INSERT INTO Shipments
+(
+    sale_id,
+    shipped,
+    delivered,
+    carrier,
+    tracking
+)
+
+VALUES
+(
+    1,
+    1,
+    1,
+    'Prime Hawaiian Movers',
+    NULL
+),
+(
+    2,
+    1,
+    1,
+    'FedEx',
+    '05218962519602'
+),
+(
+    3,
+    1,
+    1,
+    'FedEx',
+    '05227994632790'
+);
 
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;

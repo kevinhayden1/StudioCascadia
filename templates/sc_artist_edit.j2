@@ -15,19 +15,19 @@
 <h3>Artist Management</h3>
 <h4>Edit Artist</h4>
 
-<form id="ArtistEdit" action="/artist_edit" method="post">
+<form id="ArtistEdit" action="/artist_edit/{{data[0].id}}" method="post">
 
     <div class="form-group row">
         <label for="inputid" class="col-sm-2 col-form-label">ID</label>
         <div class="col-sm-10">
-        <input type="text" value="1" class="form-control" id="inputLastName1" name="id" placeholder="id">
+        <input type="text" value="{{data[0].id}}" class="form-control" id="inputLastName1" name="id" placeholder="id">
         </div>
     </div>
 
     <div class="form-group row">
         <label for="inputLastName1" class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-10">
-        <input type="text" value="Last" class="form-control" id="inputLastName1" name="last_name" placeholder="Last Name">
+        <input type="text" value="{{data[0].lname}}" class="form-control" id="inputLastName1" name="last_name" placeholder="Last Name">
         </div>
     </div>
     
