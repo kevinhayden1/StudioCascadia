@@ -1,0 +1,74 @@
+<html>
+
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+{% endblock %}
+
+{% block body %}
+
+<div style="text-align: center;">
+<div style="display: inline-block; text-align: left;">
+
+
+<h3>Pieces Artists Management</h3>
+<h4>Add a value to Pieces_Artists</h4>
+
+<form id="insertPieces_Artists" action="/piece_add" method="post">
+
+    <div class="form-group row">
+        <label for="inputArtist5" class="col-sm-2 col-form-label">Artist ID</label>
+        <div class="col-sm-10">
+       <select name="artist_id">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        </div>
+    </div>
+    
+    </br>
+
+    <div class="form-group row">
+        <label for="inputPiece5" class="col-sm-2 col-form-label">Piece ID</label>
+        <div class="col-sm-10">
+       <select name="piece_id">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+        </div>
+    </div>
+       
+    </br>
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+        <button type="submit"  name="add_piece_artist" value="add_piece_artist" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+
+</form>
+
+{% endblock %}
+
+</html>
+
+</div>
+</div>

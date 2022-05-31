@@ -337,13 +337,28 @@ def pieces_artists():
     query = "SELECT * FROM Pieces_Artists;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
+    print(results)
     db_connection.close()
     return render_template("sc_pieces_artists.j2", Pieces_Artists=results)
 
-## Add Form
-@app.route('/piece_artist_add', methods=['GET'])
+# Add Pieces_Artists
+@app.route('/piece_add', methods=["POST", "GET"])
 def piece_artist_add():
-    return render_template("sc_piece_artist_add.j2")
+    if request.method == "POST":
+        if request.form.get("add_piece_artist"):
+            #grab user form inputs
+            artist_id = request.form["artist_id"]
+            piece_id = request.form["piece_id"]
+            db_connection = db.connect_to_database()
+            query = "INSERT INTO Pieces_Artists (artist_id, piece_id) VALUES (%s, %s);"
+            cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (artist_id, piece_id))
+            results = cursor.fetchall()
+            db_connection.commit()
+            db_connection.close()
+        return redirect(url_for("pieces_artists"))
+
+    if request.method == "GET":
+        return render_template("sc_piece_artist_add.j2")
 
 ## Edit Form
 @app.route('/piece_artist_edit', methods=['GET'])
@@ -532,5 +547,5 @@ def shipment_delete(id):
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 4654))
+    port = int(os.environ.get('PORT', 3654))
     app.run(port=port, debug=True)
