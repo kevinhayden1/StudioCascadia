@@ -25,6 +25,7 @@ def artists():
         query = "SELECT * FROM Artists;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
+        print(results)
         db_connection.close()
         return render_template("sc_artists.j2", Artists=results)
 
@@ -61,20 +62,21 @@ def artist_edit(id):
 
         # mySQL query to grab the info of the person with our passed id
         query = "SELECT * FROM Artists WHERE id = %s"
-        cursor = db_connection.cursor()
-        cursor.execute(query, (id,))
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (id,))
         data = cursor.fetchall()
+        print(data)
 
         # # mySQL query to grab data for dropdowns
         query2 = "SELECT id, last_name FROM Artists"
-        cursor = db_connection.cursor()
-        cursor.execute(query2)
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query2)
         artist_data = cursor.fetchall()
-
+        print(artist_data)
         db_connection.close()
 
         # render artist_edit page passing our query data and artist data to the artist_edit template
-        return render_template("sc_artist_edit.j2", data=data, artists=artist_data)
+        return render_template("sc_artist_edit.j2", data=data, Artists=artist_data)
         #  return render_template("sc_artist_edit.j2")
 
     if request.method == "POST":
