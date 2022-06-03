@@ -57,8 +57,6 @@ def artist_add():
 @app.route("/artist_edit/<int:id>", methods=["POST", "GET"])
 def artist_edit(id):
     if request.method == "GET":
-        print("Edit GET")
-        print(id)
         db_connection = db.connect_to_database()
 
         # mySQL query to grab the info of the person with our passed id
@@ -81,7 +79,6 @@ def artist_edit(id):
 
     if request.method == "POST":
         if request.form.get("edit_artist"):
-            print("Edit POST")
             db_connection = db.connect_to_database()
 
             #grab user form inputs
