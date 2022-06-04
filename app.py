@@ -148,11 +148,6 @@ def customer_add():
     if request.method == "GET":
         return render_template("sc_customer_add.j2")
 
-## Edit Form
-@app.route('/customer_edit', methods=['GET'])
-def customer_edit():
-    return render_template("sc_customer_edit.j2")
-
 # Delete Customer
 @app.route("/customer_delete/<int:id>")
 def customer_delete(id):
@@ -198,23 +193,6 @@ def location_add():
     if request.method == "GET":
         return render_template("sc_location_add.j2")
 
-## Edit Form
-@app.route('/location_edit', methods=['GET'])
-def location_edit():
-    return render_template("sc_location_edit.j2")
-
-# Delete Location
-@app.route("/location_delete/<int:id>")
-def location_delete(id):
-    db_connection = db.connect_to_database()
-    query = "DELETE FROM Locations WHERE id = '%s';"
-    cursor = db_connection.cursor()
-    cursor.execute(query, (id,))
-    db_connection.commit()
-
-    # redirect
-    return redirect("/locations")
-
 # Mediums CRUD
 
 @app.route('/mediums', methods=['GET'])
@@ -244,11 +222,6 @@ def medium_add():
 
     if request.method == "GET":
         return render_template("sc_medium_add.j2")
-
-## Edit Form
-@app.route('/medium_edit', methods=['GET'])
-def medium_edit():
-    return render_template("sc_medium_edit.j2")
 
 # Delete Medium
 @app.route("/medium_delete/<int:id>")
@@ -310,11 +283,6 @@ def payment_add():
 
     if request.method == "GET":
         return render_template("sc_payment_add.j2")
-
-## Edit Form
-@app.route('/payment_edit', methods=['GET'])
-def payment_edit():
-    return render_template("sc_payment_edit.j2")
 
 # Delete Payment
 @app.route("/payment_delete/<int:id>")
@@ -508,11 +476,6 @@ def sale_add():
     if request.method == "GET":
         return render_template("sc_sale_add.j2")
 
-## Edit Form
-@app.route('/sale_edit', methods=['GET'])
-def sale_edit():
-    return render_template("sc_sale_edit.j2")
-
 # Delete Sale
 @app.route("/sale_delete/<int:id>")
 def sale_delete(id):
@@ -570,11 +533,6 @@ def shipment_add():
 
     if request.method == "GET":
         return render_template("sc_shipment_add.j2")
-
-## Edit Form
-@app.route('/shipment_edit', methods=['GET'])
-def shipment_edit():
-    return render_template("sc_shipment_edit.j2")
 
 # Delete Shipment
 @app.route("/shipment_delete/<int:id>")
