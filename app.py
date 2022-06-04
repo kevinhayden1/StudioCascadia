@@ -25,9 +25,23 @@ def artists():
         query = "SELECT * FROM Artists;"
         cursor = db.execute_query(db_connection=db_connection, query=query)
         results = cursor.fetchall()
-        print(results)
         db_connection.close()
         return render_template("sc_artists.j2", Artists=results)
+
+    if request.method == "POST":
+        if request.form.get("artist_search"):
+            first_name = request.form["ArtistName"]
+            last_name = request.form["ArtistName"]
+            query = "SELECT * FROM Artists WHERE first_name LIKE %s OR last_name LIKE %s"
+            db_connection = db.connect_to_database()
+            cursor = db.execute_query(first_name, last_name)
+            results = cursor.fetchall()
+            query2 = "SELECT * FROM Artists;"
+            cursor.execute(query2)
+            results = curor.fetchall()
+            db_connection.commit()
+            db_connection.close()
+            return render_template("sc_artists.j2", search_results=search_results, Artists=results)
 
 # Add Artist
 @app.route('/artist_add', methods=["POST", "GET"])
