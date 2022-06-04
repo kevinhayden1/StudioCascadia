@@ -341,7 +341,7 @@ def pieces_artists():
     return render_template("sc_pieces_artists.j2", Pieces_Artists=results)
 
 # Add Pieces_Artists
-@app.route('/piece_add', methods=["POST", "GET"])
+@app.route('/piece_artist_add', methods=["POST", "GET"])
 def piece_artist_add():
     if request.method == "POST":
         if request.form.get("add_piece_artist"):
@@ -378,14 +378,15 @@ def piece_artist_delete(id):
 
 # Pieces CRUD
 
-@app.route('/pieces', methods=['GET'])
+@app.route('/pieces', methods=["POST", "GET"])
 def pieces():
-    db_connection = db.connect_to_database()
-    query = "SELECT * FROM Pieces;"
-    cursor = db.execute_query(db_connection=db_connection, query=query)
-    results = cursor.fetchall()
-    db_connection.close()
-    return render_template("sc_pieces.j2", Pieces=results)
+    if request.method == "GET":
+        db_connection = db.connect_to_database()
+        query = "SELECT * FROM Pieces;"
+        cursor = db.execute_query(db_connection=db_connection, query=query)
+        results = cursor.fetchall()
+        db_connection.close()
+        return render_template("sc_pieces.j2", Pieces=results)
 
 # Add Piece
 @app.route('/piece_add', methods=["POST", "GET"])
@@ -414,9 +415,53 @@ def piece_add():
         return render_template("sc_piece_add.j2")
 
 ## Edit Form
-@app.route('/piece_edit', methods=['GET'])
-def piece_edit():
-    return render_template("sc_piece_edit.j2")
+@app.route("/piece_edit/<int:id>", methods=["POST", "GET"])
+def piece_edit(id):
+    if request.method == "GET":
+        db_connection = db.connect_to_database()
+
+        # mySQL query to grab the info of the item with our passed id
+        query = "SELECT * FROM Pieces WHERE id = %s"
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (id,))
+        data = cursor.fetchall()
+        print(data)
+
+        # # mySQL query to grab data for dropdowns
+        query2 = "SELECT id, title FROM Pieces"
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query2)
+        piece_data = cursor.fetchall()
+        print(piece_data)
+        db_connection.close()
+
+        # render piece_edit page passing our query data and piece data to the piece_edit template
+        return render_template("sc_piece_edit.j2", data=data, Pieces=piece_data)
+        #  return render_template("sc_piece_edit.j2")
+
+    if request.method == "POST":
+        if request.form.get("edit_piece"):
+            db_connection = db.connect_to_database()
+
+            #grab user form inputs
+            id = request.form["id"]
+            location_id = request.form["location_id"]
+            medium_id = request.form["medium_id"]
+            title = request.form["title"]
+            year = request.form["year"]
+            price = request.form["price"]
+            available = request.form["available"]
+            hold = request.form["hold"]
+            commission = request.form["commission"]
+            style = request.form["style"]
+
+            query = "UPDATE Pieces SET location_id = %s, medium_id = %s, title = %s, year = %s, price = %s, available = %s, hold=%s, commission = %s, style = %s WHERE Pieces.id = %s"
+            cur = db_connection.cursor()
+            cur.execute(query, (location_id, medium_id, title, year, price, available, hold, commission, style, id))
+            db_connection.commit()
+            db_connection.close()
+        
+            return redirect("/pieces")
 
 # Delete Piece
 @app.route("/piece_delete/<int:id>")

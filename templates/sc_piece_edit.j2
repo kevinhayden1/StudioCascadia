@@ -1,186 +1,60 @@
 <html>
 
-{% block head %}
+<head>
+	<title>Edit Pieces</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body>
+    <div>
 
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
+        </br>
 
-{% endblock %}
+        <div id="edit">
+            <!-- form to edit data in pieces-->
+            <form id="PieceEdit" action="/piece_edit/{{data[0].id}}" method="post">
+                <legend><strong>Edit Piece</strong></legend>
+                <fieldset>
+                    <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
+                    <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
 
-{% block body %}
+                    <input type="hidden" value="{{data[0].id}}" class="form-control" id="itemID" name="itemID" required>
+                    
+                    <label for="make">location id:</label>
+                    <input type="text" value="{{data[0].location_id}}" class="form-control" id="location_id" name="location_id" pattern="[A-Za-z]{1,}" required>
+                    
+                    <label for="model">medium id:</label>
+                    <input type="text" value="{{data[0].medium_id}}" class="form-control" id="medium_id" name="medium_id" pattern="[A-Za-z0-9]{1,}" required>
+                    
+                    <label for="year">title:</label>
+                    <input type="text" value="{{data[0].title}}" class="form-control" id="title" name="title" pattern="[A-Za-z0-9]{1,}" required>
 
-<div style="text-align: center;">
-<div style="display: inline-block; text-align: left;">
+                    <label for="year">year:</label>
+                    <input type="text" value="{{data[0].year}}" class="form-control" id="year" name="year" pattern="[A-Za-z0-9]{1,}" required>
 
-
-<h3>Pieces Management</h3>
-<h4>Edit Piece</h4>
-
-<form>
-
-    <div class="form-group row">
-        <label for="inputPiece" class="col-sm-2 col-form-label">Location ID</label>
-        <div class="col-sm-10">
-       <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        </div>
-    </div>
+                    <label for="year">price:</label>
+                    <input type="text" value="{{data[0].price}}" class="form-control" id="price" name="price" pattern="[A-Za-z0-9]{1,}" required>
     
-    </br>
+                    <label for="year">available:</label>
+                    <input type="text" value="{{data[0].available}}" class="form-control" id="available" name="available" pattern="[A-Za-z0-9]{1,}" required>
 
-    <div class="form-group row">
-        <label for="inputMediumID2" class="col-sm-2 col-form-label">Medium ID</label>
-        <div class="col-sm-10">
-       <select>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-        </select>
-        </div>
-    </div>
-    
-    </br>
+                    <label for="year">hold:</label>
+                    <input type="text" value="{{data[0].hold}}" class="form-control" id="hold" name="hold" pattern="[A-Za-z0-9]{1,}" required>
 
-    <div class="form-group row">
-        <label for="inputTitle" class="col-sm-2 col-form-label">Title</label>
-        <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputTitle" placeholder="Title">
-        </div>
-    </div>
-    
-    </br>
+                    <label for="year">commission:</label>
+                    <input type="text" value="{{data[0].commission}}" class="form-control" id="commission" name="commission" pattern="[A-Za-z0-9]{1,}" required>
 
-    <div class="form-group row">
-        <label for="inputYear" class="col-sm-2 col-form-label">Year</label>
-        <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputYear" placeholder="Year">
-        </div>
-    </div>
-    
-    </br>
+                    <label for="year">style:</label>
+                    <input type="text" value="{{data[0].style}}" class="form-control" id="style" name="style" pattern="[A-Za-z0-9]{1,}" required>
 
-    <div class="form-group row">
-        <label for="inputPrice" class="col-sm-2 col-form-label">Price</label>
-        <div class="col-sm-10">
-        <input type="number" class="form-control" id="inputPrice" placeholder="Price">
-        </div>
-    </div>
-    
-    </br>
-
-    <div class="form-group row">
-        <label for="inputAvailable" class="col-sm-2 col-form-label">Available</label>
-        <div class="col-sm-10">
-        <select>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>
-        </div>
-    </div>
-
-    </br>
-
-    <div class="form-group row">
-        <label for="inputHold" class="col-sm-2 col-form-label">Hold</label>
-        <div class="col-sm-10">
-        <select>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        </div>
-    </div>
-    
-    </br>
-        <div class="form-group row">
-        <label for="inputCommission" class="col-sm-2 col-form-label">Commission</label>
-        <div class="col-sm-10">
-        <select>
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-        </select>
-        </div>
-    </div>
-
-    </br>
-        <div class="form-group row">
-        <label for="inputStyle" class="col-sm-2 col-form-label">Style</label>
-        <div class="col-sm-10">
-        <input type="inputStyle" class="form-control" id="inputStyle" placeholder="Style">
-        </div>
-    </div>
-    
-    </br>
-
-    <!--
-    <fieldset class="form-group">
-        <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-        <div class="col-sm-10">
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-            <label class="form-check-label" for="gridRadios1">
-                First radio
-            </label>
-            </div>
-            <div class="form-check">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-            <label class="form-check-label" for="gridRadios2">
-                Second radio
-            </label>
-            </div>
-            <div class="form-check disabled">
-            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-            <label class="form-check-label" for="gridRadios3">
-                Third disabled radio
-            </label>
-            </div>
-        </div>
-        </div>
-    </fieldset>
-    -->
-
-    <div class="form-group row">
-        <div class="col-sm-2">Verify Data</div>
-        <div class="col-sm-10">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck1">
-            <label class="form-check-label" for="gridCheck1">
-            Verified
-            </label>
-        </div>
-        </div>
-    </div>
-
-    </br>
-
-    <div class="form-group row">
-        <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </div>
-
-</form>
-
-{% endblock %}
-
-</div>
-</div>
+                </fieldset>
+                <input type="submit" value="Edit Piece" name="edit_piece" class="btn btn-primary" style="margin:.5rem;">
+                <a href='/pieces'><input class="btn" type="button" value="cancel"></a>
+            </form>
 
 </html>
