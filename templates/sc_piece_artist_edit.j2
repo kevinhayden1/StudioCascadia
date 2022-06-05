@@ -1,3 +1,4 @@
+
 <html>
 
 <head>
@@ -17,7 +18,7 @@
 
         <div id="edit">
             <!-- form to edit data in pieces artists-->
-            <form id="PiecesArtistsEdit" action="/artist_edit/{{data[0].id}}" method="post">
+            <form id="PiecesArtistsEdit" action="/piece_artist_edit/{{data[0].id}}" method="post">
                 <legend><strong>Edit Pieces_Artists</strong></legend>
                 <fieldset>
                     <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
@@ -26,13 +27,13 @@
                     <input type="hidden" value="{{data[0].id}}" class="form-control" id="personID" name="id" required>
                     
                     <label for="make">last name:</label>
-                    <input type="text" value="{{data[0].artist_id}}" class="form-control" id="artist_id" name="artist_id" pattern="[A-Za-z]{1,}" required>
+                    <input type="tel" value="{{data[0].artist_id}}" class="form-control" id="artist_id" name="artist_id" required>
                     
-                    <label for="model">first name:</label>
-                    <input type="text" value="{{data[0].piece_id}}" class="form-control" id="piece_id" name="piece_id" pattern="[A-Za-z0-9]{1,}" required>
+                    <label for="model">title:</label>
+                    <input type="tel" value="{{data[0].piece_id}}" class="form-control" id="piece_id" name="piece_id" required>
                     
                 </fieldset>
-                <input type="submit" value="Edit Artist" name="piece_artist_edit" class="btn btn-primary" style="margin:.5rem;">
+                <input type="submit" value="Edit Artist" name="edit_piece_artist" class="btn btn-primary" style="margin:.5rem;">
                 <a href='/pieces_artists'><input class="btn" type="button" value="cancel"></a>
             </form>
 

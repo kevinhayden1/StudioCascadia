@@ -323,13 +323,13 @@ def payment_delete(id):
 
 # Pieces_Artists CRUD
 
-@app.route('/pieces_artists', methods=['GET'])
+@app.route('/pieces_artists', methods=["POST", "GET"])
 def pieces_artists():
     db_connection = db.connect_to_database()
     query = "SELECT * FROM Pieces_Artists;"
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
-    print(results)
+    # print(results)
     db_connection.close()
     return render_template("sc_pieces_artists.j2", Pieces_Artists=results)
 
@@ -364,9 +364,40 @@ def piece_artist_add():
         return render_template("sc_piece_artist_add.j2", artists=results10, pieces=results11)
 
 ## Edit Form
-@app.route('/piece_artist_edit', methods=['GET'])
-def piece_artist_edit():
-    return render_template("sc_piece_artist_edit.j2")
+@app.route("/piece_artist_edit/<int:id>", methods=["POST", "GET"])
+def piece_artist_edit(id):
+    if request.method == "GET":
+        db_connection = db.connect_to_database()
+
+        query = "SELECT * FROM Pieces_Artists WHERE id = %s"
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (id,))
+        data = cursor.fetchall()
+
+        query2 = "SELECT id, piece_id, artist_id FROM Pieces_Artists"
+        db_connection = db.connect_to_database()
+        cursor = db.execute_query(db_connection=db_connection, query=query2)
+        piece_artist_data = cursor.fetchall()
+        db_connection.close()
+
+        return render_template("sc_piece_artist_edit.j2", data=data, Pieces_Artists=piece_artist_data)
+
+    if request.method == "POST":
+        if request.form.get("edit_piece_artist"):
+            db_connection = db.connect_to_database()
+
+            #grab user form inputs
+            id = request.form["id"]
+            piece_id = request.form["piece_id"]
+            artist_id = request.form["artist_id"]
+
+            query = "UPDATE Pieces_Artists SET piece_id = %s, artist_id = %s WHERE Pieces_Artists.id = %s"
+            cur = db_connection.cursor()
+            cur.execute(query, (piece_id, artist_id, id))
+            db_connection.commit()
+            db_connection.close()
+
+            return redirect("/pieces_artists")
 
 # Delete Piece Artist
 @app.route("/piece_artist_delete/<int:id>")
@@ -440,14 +471,14 @@ def piece_edit(id):
         db_connection = db.connect_to_database()
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (id,))
         data = cursor.fetchall()
-        print(data)
+        # print(data)
 
         # # mySQL query to grab data for dropdowns
         query2 = "SELECT id, title FROM Pieces"
         db_connection = db.connect_to_database()
         cursor = db.execute_query(db_connection=db_connection, query=query2)
         piece_data = cursor.fetchall()
-        print(piece_data)
+        # print(piece_data)
         db_connection.close()
 
         # render piece_edit page passing our query data and piece data to the piece_edit template
