@@ -19,19 +19,15 @@
 <form id="insertPiece" action="/piece_add" method="post">
 
     <div class="form-group row">
-        <label for="inputPiece" class="col-sm-2 col-form-label">Location ID</label>
+        <label for="inputPiece" class="col-sm-2 col-form-label">Location</label>
         <div class="col-sm-10">
-       <select name="location_id">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+       <select class="form-control" id="location_id" name="location_id" placeholder="" required> 
+            <!-- Access our location tuple passed from app.py-->
+            <option value="0">&nbsp;</option>
+            {% for location in locations %}
+                    <option value="{{ location['id'] }}"> {{location['location']}}</option> 
+          <!-- End of this for loop -->
+            {% endfor %} 
         </select>
         </div>
     </div>
@@ -39,19 +35,15 @@
     </br>
 
     <div class="form-group row">
-        <label for="inputMediumID2" class="col-sm-2 col-form-label">Medium ID</label>
+        <label for="inputMediumID2" class="col-sm-2 col-form-label">Medium</label>
         <div class="col-sm-10">
-       <select name="medium_id">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+       <select class="form-control" id="medium_id" name="medium_id" placeholder="" required> 
+            <!-- Access our medium tuple passed from app.py-->
+            <option value="0">&nbsp;</option>
+            {% for medium in mediums %}
+                    <option value="{{ medium['id'] }}"> {{medium['medium']}}</option> 
+          <!-- End of this for loop -->
+            {% endfor %} 
         </select>
         </div>
     </div>

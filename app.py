@@ -350,7 +350,18 @@ def piece_artist_add():
         return redirect(url_for("pieces_artists"))
 
     if request.method == "GET":
-        return render_template("sc_piece_artist_add.j2")
+        # get valid artist ID drop down
+        db_connection = db.connect_to_database()
+        query10 = "Select id, last_name FROM Artists;"
+        cursor10 = db.execute_query(db_connection=db_connection, query=query10)
+        results10 = cursor10.fetchall()
+        # get valid piece ID drop down
+        query11 = "Select id, title FROM Pieces;"
+        cursor11 = db.execute_query(db_connection=db_connection, query=query11)
+        results11 = cursor11.fetchall()
+        db_connection.commit()
+        db_connection.close()
+        return render_template("sc_piece_artist_add.j2", artists=results10, pieces=results11)
 
 ## Edit Form
 @app.route('/piece_artist_edit', methods=['GET'])
@@ -405,7 +416,18 @@ def piece_add():
         return redirect(url_for("pieces"))
 
     if request.method == "GET":
-        return render_template("sc_piece_add.j2")
+        # get valid location ID drop down
+        db_connection = db.connect_to_database()
+        query8 = "Select id, location FROM Locations;"
+        cursor8 = db.execute_query(db_connection=db_connection, query=query8)
+        results8 = cursor8.fetchall()
+        # get valid medium ID drop down
+        query9 = "Select id, medium FROM Mediums;"
+        cursor9 = db.execute_query(db_connection=db_connection, query=query9)
+        results9 = cursor9.fetchall()
+        db_connection.commit()
+        db_connection.close()
+        return render_template("sc_piece_add.j2", locations=results8, mediums=results9)
 
 ## Edit Form
 @app.route("/piece_edit/<int:id>", methods=["POST", "GET"])
@@ -447,6 +469,7 @@ def piece_edit(id):
             hold = request.form["hold"]
             commission = request.form["commission"]
             style = request.form["style"]
+            
 
             query = "UPDATE Pieces SET location_id = %s, medium_id = %s, title = %s, year = %s, price = %s, available = %s, hold=%s, commission = %s, style = %s WHERE Pieces.id = %s"
             cur = db_connection.cursor()
@@ -499,7 +522,18 @@ def sale_add():
         return redirect(url_for("sales"))
 
     if request.method == "GET":
-        return render_template("sc_sale_add.j2")
+        # get valid piece ID drop down
+        db_connection = db.connect_to_database()
+        query6 = "Select id, title FROM Pieces;"
+        cursor6 = db.execute_query(db_connection=db_connection, query=query6)
+        results6 = cursor6.fetchall()
+        # get valid customer ID drop down
+        query7 = "Select id, last_name FROM Customers;"
+        cursor7 = db.execute_query(db_connection=db_connection, query=query7)
+        results7 = cursor7.fetchall()
+        db_connection.commit()
+        db_connection.close()
+        return render_template("sc_sale_add.j2", pieces=results6, customers=results7)
 
 # Delete Sale
 @app.route("/sale_delete/<int:id>")
@@ -557,7 +591,14 @@ def shipment_add():
         return redirect(url_for("shipments"))
 
     if request.method == "GET":
-        return render_template("sc_shipment_add.j2")
+        # get valid sale ID drop down
+        db_connection = db.connect_to_database()
+        query5 = "Select id, amount FROM Sales;"
+        cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+        results5 = cursor5.fetchall()
+        db_connection.commit()
+        db_connection.close()
+        return render_template("sc_shipment_add.j2", sales=results5)
 
 # Delete Shipment
 @app.route("/shipment_delete/<int:id>")
@@ -574,5 +615,5 @@ def shipment_delete(id):
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5554))
+    port = int(os.environ.get('PORT', 6654))
     app.run(port=port, debug=True)

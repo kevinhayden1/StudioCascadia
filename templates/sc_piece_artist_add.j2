@@ -19,19 +19,15 @@
 <form id="insertPieces_Artists" action="/piece_artist_add" method="post">
 
     <div class="form-group row">
-        <label for="inputArtist5" class="col-sm-2 col-form-label">Artist ID</label>
+        <label for="inputArtist5" class="col-sm-2 col-form-label">Artist</label>
         <div class="col-sm-10">
-       <select name="artist_id">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+               <select class="form-control" id="artist_id" name="artist_id" placeholder="" required> 
+            <!-- Access our sales tuple passed from app.py-->
+            <option value="0">&nbsp;</option>
+            {% for artist in artists %}
+                    <option value="{{ artist['id'] }}"> {{artist['id']}}</option> 
+            <!-- End of this for loop -->
+            {% endfor %} 
         </select>
         </div>
     </div>
@@ -39,19 +35,15 @@
     </br>
 
     <div class="form-group row">
-        <label for="inputPiece5" class="col-sm-2 col-form-label">Piece ID</label>
+        <label for="inputPiece5" class="col-sm-2 col-form-label">Piece</label>
         <div class="col-sm-10">
-       <select name="piece_id">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+               <select class="form-control" id="piece_id" name="piece_id" placeholder="" required> 
+            <!-- Access our sales tuple passed from app.py-->
+            <option value="0">&nbsp;</option>
+            {% for piece in pieces %}
+                    <option value="{{ piece['id'] }}"> {{piece['title']}}</option> 
+            <!-- End of this for loop -->
+            {% endfor %} 
         </select>
         </div>
     </div>
