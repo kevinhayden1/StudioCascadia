@@ -252,6 +252,11 @@ def medium_delete(id):
 
 # Payments CRUD
 
+# get valid sale ID drop down
+query5 = "Select id, amount FROM Sales;"
+cursor5 = db.execute_query(db_connection=db_connection, query=query5)
+results5 = cursor5.fetchall()
+
 @app.route('/payments', methods=['GET'])
 def payments():
     db_connection = db.connect_to_database()
@@ -259,7 +264,8 @@ def payments():
     cursor = db.execute_query(db_connection=db_connection, query=query)
     results = cursor.fetchall()
     db_connection.close()
-    return render_template("sc_payments.j2", Payments=results)
+
+    return render_template("sc_payments.j2", Payments=results, sales=results5)
 
 ## Add Form
 @app.route('/payment_add', methods=["POST", "GET"])
@@ -297,7 +303,7 @@ def payment_add():
         return redirect(url_for("payments"))
 
     if request.method == "GET":
-        return render_template("sc_payment_add.j2")
+        return render_template("sc_payment_add.j2", sales=results5)
 
 # Delete Payment
 @app.route("/payment_delete/<int:id>")
@@ -564,5 +570,5 @@ def shipment_delete(id):
 ### Listener
 
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 3854))
+    port = int(os.environ.get('PORT', 5454))
     app.run(port=port, debug=True)

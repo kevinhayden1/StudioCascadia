@@ -23,18 +23,17 @@
 
     <div class="form-group row">
         <label for="inputSaleID" class="col-sm-2 col-form-label">Sale ID</label>
-        <select name="sale_id">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+        
+        <select class="form-control" id="sale_id" name="sale_id" placeholder="" required> 
+            <!-- Access our sales tuple passed from app.py-->
+            <option value="0">&nbsp;</option>
+            {% for sale in sales %}
+                    <option value="{{ sale['id'] }}"> {{sale['id']}}</option> 
+          <!-- End of this for loop -->
+            {% endfor %} 
         </select>
+
+
         <div class="col-sm-10">
         </div>
     </div>
