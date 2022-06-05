@@ -23,16 +23,16 @@
                     <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
                     <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
 
-                    <input type="hidden" value="{{data[0].id}}" class="form-control" id="personID" name="personID" required>
+                    <input type="hidden" value="{{data[0].id}}" class="form-control" id="personID" name="id" required>
                     
                     <label for="make">last name:</label>
-                    <input type="text" value="{{data[0].last_name}}" class="form-control" id="lname" name="lname" pattern="[A-Za-z]{1,}" required>
+                    <input type="text" value="{{data[0].last_name}}" class="form-control" id="lname" name="last_name" pattern="[A-Za-z]{1,}" required>
                     
                     <label for="model">first name:</label>
-                    <input type="text" value="{{data[0].first_name}}" class="form-control" id="fname" name="fname" pattern="[A-Za-z0-9]{1,}" required>
+                    <input type="text" value="{{data[0].first_name}}" class="form-control" id="fname" name="first_name" pattern="[A-Za-z0-9]{1,}" required>
                     
                     <label for="year">address:</label>
-                    <input type="text" value="{{data[0].address}}" class="form-control" id="address" name="address" pattern="[A-Za-z0-9]{1,}" required>
+                    <input type="text" value="{{data[0].address}}" class="form-control" id="address" name="address" required>
 
                     <label for="year">city:</label>
                     <input type="text" value="{{data[0].city}}" class="form-control" id="city" name="city" pattern="[A-Za-z0-9]{1,}" required>
@@ -44,7 +44,7 @@
                     <input type="text" value="{{data[0].zip}}" class="form-control" id="zip" name="zip" pattern="[A-Za-z0-9]{1,}" required>
 
                     <label for="year">phone:</label>
-                    <input type="text" value="{{data[0].phone}}" class="form-control" id="phone" name="phone" pattern="[A-Za-z0-9]{1,}" required>
+                    <input type="tel" value="{{data[0].phone}}" class="form-control" id="phone" name="phone" pattern="[A-Za-z0-9]{1,}" required>
 
                 </fieldset>
                 <input type="submit" value="Edit Artist" name="edit_artist" class="btn btn-primary" style="margin:.5rem;">
