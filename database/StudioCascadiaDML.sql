@@ -7,7 +7,7 @@ Including SELECT, INSERT, UPDATE, DELETE
 
 Throughout this document, the colon character (:) is used to 
 preceded variables that will have data from the backend 
-programming language.
+programming language
 
 */
 

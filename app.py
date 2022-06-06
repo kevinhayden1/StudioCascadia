@@ -1,23 +1,27 @@
+# Citation for the following application and pages referenced within application:
+# Date 6/6/2022
+# Copied/Adapted/Based on:
+# Source URL: 
+# Flask Starter App from Course: https://github.com/osu-cs340-ecampus/flask-starter-app
+
+# Imports
 from email.mime import application
 from flask import Flask, render_template, json, redirect, request, url_for
 import os
 import database.db_connector as db
 
-### Configuration
-
+# Configuration
 app = Flask(__name__)
 db_connection = db.connect_to_database()
 
-### Routes 
+# Routes 
 
 # Home
-
 @app.route('/')
 def root():
     return render_template("main.j2")
 
-# Artists CRUD
-
+# Artists READ
 @app.route('/artists', methods=["POST", "GET"])
 def artists():
     if request.method == "GET":
@@ -33,7 +37,6 @@ def artists():
             last_name = request.form["ArtistName"]
             db_connection = db.connect_to_database()
             query = "SELECT * FROM Artists WHERE first_name LIKE %s OR last_name LIKE %s"
-            #cursor = db.execute_query(db_connection=db_connection, query=query)
             cursor = db.execute_query(first_name, last_name)
             results = cursor.fetchall()
             query2 = "SELECT * FROM Artists;"
@@ -43,8 +46,7 @@ def artists():
             db_connection.close()
             return render_template("sc_artists.j2", search_results=search_results, Artists=results)
 
-
-# Add Artist
+# Artists CREATE
 @app.route('/artist_add', methods=["POST", "GET"])
 def artist_add():
     if request.method == "POST":
@@ -68,7 +70,7 @@ def artist_add():
     if request.method == "GET":
         return render_template("sc_artist_add.j2")
 
-# Edit Artist
+# Artists UPDATE
 
 @app.route("/artist_edit/<int:id>", methods=["POST", "GET"])
 def artist_edit(id):
@@ -80,14 +82,12 @@ def artist_edit(id):
         db_connection = db.connect_to_database()
         cursor = db.execute_query(db_connection=db_connection, query=query, query_params = (id,))
         data = cursor.fetchall()
-        print(data)
 
-        # # mySQL query to grab data for dropdowns
+        # mySQL query to grab data for dropdowns
         query2 = "SELECT id, last_name FROM Artists"
         db_connection = db.connect_to_database()
         cursor = db.execute_query(db_connection=db_connection, query=query2)
         artist_data = cursor.fetchall()
-        print(artist_data)
         db_connection.close()
 
         # render artist_edit page passing our query data and artist data to the artist_edit template
@@ -117,7 +117,7 @@ def artist_edit(id):
             return redirect("/artists")
 
 
-# Delete Artist
+# Artists DELETE
 @app.route("/artist_delete/<int:id>")
 def artist_delete(id):
     db_connection = db.connect_to_database()
@@ -129,8 +129,7 @@ def artist_delete(id):
     # redirect
     return redirect("/artists")
 
-# Customers CRUD
-
+# Customers BROWSE
 @app.route('/customers', methods=['GET'])
 def customers():
     db_connection = db.connect_to_database()
@@ -140,6 +139,7 @@ def customers():
     db_connection.close()
     return render_template("sc_customers.j2", Customers=results)
 
+# Customers CREATE
 @app.route('/customer_add', methods=["POST", "GET"])
 def customer_add():
     if request.method == "POST":
@@ -163,7 +163,7 @@ def customer_add():
     if request.method == "GET":
         return render_template("sc_customer_add.j2")
 
-# Delete Customer
+# Customers DELETE
 @app.route("/customer_delete/<int:id>")
 def customer_delete(id):
     db_connection = db.connect_to_database()
@@ -175,8 +175,7 @@ def customer_delete(id):
     # redirect
     return redirect("/customers")
 
-# Locations CRUD
-
+# Locations BROWSE
 @app.route('/locations', methods=['GET'])
 def locations():
     db_connection = db.connect_to_database()
@@ -186,7 +185,7 @@ def locations():
     db_connection.close()
     return render_template("sc_locations.j2", Locations=results)
 
-# Add Location
+# Locations CREATE
 @app.route('/location_add', methods=["POST", "GET"])
 def location_add():
     if request.method == "POST":
@@ -208,8 +207,7 @@ def location_add():
     if request.method == "GET":
         return render_template("sc_location_add.j2")
 
-# Mediums CRUD
-
+# Mediums BROWSE
 @app.route('/mediums', methods=['GET'])
 def mediums():
     db_connection = db.connect_to_database()
@@ -219,7 +217,7 @@ def mediums():
     db_connection.close()
     return render_template("sc_mediums.j2", Mediums=results)
 
-# Add Medium
+# Mediums CREATE
 @app.route('/medium_add', methods=["POST", "GET"])
 def medium_add():
     if request.method == "POST":
@@ -238,7 +236,7 @@ def medium_add():
     if request.method == "GET":
         return render_template("sc_medium_add.j2")
 
-# Delete Medium
+# Mediums DELETE
 @app.route("/medium_delete/<int:id>")
 def medium_delete(id):
     db_connection = db.connect_to_database()
@@ -250,10 +248,7 @@ def medium_delete(id):
     # redirect
     return redirect("/mediums")
 
-# Payments CRUD
-
-
-
+# Payments BROWSE
 @app.route('/payments', methods=['GET'])
 def payments():
     db_connection = db.connect_to_database()
@@ -264,12 +259,12 @@ def payments():
 
     return render_template("sc_payments.j2", Payments=results)
 
-## Add Form
+# Payments CREATE
 @app.route('/payment_add', methods=["POST", "GET"])
 def payment_add():
     if request.method == "POST":
         if request.form.get("add_payment"):
-    #       #grab user form inputs
+            # grab user form inputs
             sale_id = request.form["sale_id"]
             date = request.form["date"]
             card = request.form["card"]
@@ -279,7 +274,7 @@ def payment_add():
             exp_date = request.form["exp_date"]
             amount = request.form["amount"]
 
-    #         # null card_number and exp_date
+            # null card_number and exp_date
             if card_number == "" or exp_date == "":
                 db_connection = db.connect_to_database()
                 query = "INSERT INTO Payments (sale_id, `date`, `card`, cash, `check`, amount) VALUES (%s, %s, %s, %s, %s, %s);"
@@ -288,7 +283,7 @@ def payment_add():
                 db_connection.commit()
                 db_connection.close()
 
-    #         # no null inputs
+            # no null inputs
             else:
                 db_connection = db.connect_to_database()
                 query = "INSERT INTO Payments (sale_id, `date`, `card`, cash, `check`, card_number, exp_date, amount) VALUES (%s, %s, %s, %s, %s, %s, %s, %s);"
@@ -309,7 +304,7 @@ def payment_add():
         db_connection.close()
         return render_template("sc_payment_add.j2", sales=results5)
 
-# Delete Payment
+# Payments DELETE
 @app.route("/payment_delete/<int:id>")
 def payment_delete(id):
     db_connection = db.connect_to_database()
@@ -321,8 +316,7 @@ def payment_delete(id):
     # redirect
     return redirect("/payments")
 
-# Pieces_Artists CRUD
-
+# Pieces_Artists BROWSE
 @app.route('/pieces_artists', methods=["POST", "GET"])
 def pieces_artists():
     db_connection = db.connect_to_database()
@@ -333,7 +327,7 @@ def pieces_artists():
     db_connection.close()
     return render_template("sc_pieces_artists.j2", Pieces_Artists=results)
 
-# Add Pieces_Artists
+# Pieces_Artists CREATE
 @app.route('/piece_artist_add', methods=["POST", "GET"])
 def piece_artist_add():
     if request.method == "POST":
@@ -363,7 +357,7 @@ def piece_artist_add():
         db_connection.close()
         return render_template("sc_piece_artist_add.j2", artists=results10, pieces=results11)
 
-# Delete Piece Artist
+# Pieces_Artists DELETE
 @app.route("/piece_artist_delete/<int:id>")
 def piece_artist_delete(id):
     db_connection = db.connect_to_database()
@@ -375,8 +369,7 @@ def piece_artist_delete(id):
     # redirect
     return redirect("/pieces_artists")
 
-# Pieces CRUD
-
+# Pieces BROWSE
 @app.route('/pieces', methods=["POST", "GET"])
 def pieces():
     if request.method == "GET":
@@ -387,7 +380,7 @@ def pieces():
         db_connection.close()
         return render_template("sc_pieces.j2", Pieces=results)
 
-# Add Piece
+# Pieces CREATE
 @app.route('/piece_add', methods=["POST", "GET"])
 def piece_add():
     if request.method == "POST":
@@ -424,7 +417,7 @@ def piece_add():
         db_connection.close()
         return render_template("sc_piece_add.j2", locations=results8, mediums=results9)
 
-# Delete Piece
+# Pieces DELETE
 @app.route("/piece_delete/<int:id>")
 def piece_delete(id):
     db_connection = db.connect_to_database()
@@ -436,8 +429,7 @@ def piece_delete(id):
     # redirect
     return redirect("/pieces")
 
-# Sales CRUD
-
+# Sales BROWSE
 @app.route('/sales', methods=['GET'])
 def sales():
     db_connection = db.connect_to_database()
@@ -447,7 +439,7 @@ def sales():
     db_connection.close()
     return render_template("sc_sales.j2", Sales=results)
 
-# Add Sale
+# Sales CREATE
 @app.route('/sale_add', methods=["POST", "GET"])
 def sale_add():
     if request.method == "POST":
@@ -480,7 +472,7 @@ def sale_add():
         db_connection.close()
         return render_template("sc_sale_add.j2", pieces=results6, customers=results7)
 
-# Delete Sale
+# Sales DELETE
 @app.route("/sale_delete/<int:id>")
 def sale_delete(id):
     db_connection = db.connect_to_database()
@@ -492,8 +484,7 @@ def sale_delete(id):
     # redirect
     return redirect("/sales")
 
-# Shipments CRUD
-
+# Shipments BROWSE
 @app.route('/shipments', methods=['GET'])
 def shipments():
     db_connection = db.connect_to_database()
@@ -503,7 +494,7 @@ def shipments():
     db_connection.close()
     return render_template("sc_shipments.j2", Shipments=results)
 
-# Add Shipment
+# Shipments CREATE
 @app.route('/shipment_add', methods=["POST", "GET"])
 def shipment_add():
     if request.method == "POST":
@@ -545,7 +536,7 @@ def shipment_add():
         db_connection.close()
         return render_template("sc_shipment_add.j2", sales=results5)
 
-# Delete Shipment
+# Shipments DELETE
 @app.route("/shipment_delete/<int:id>")
 def shipment_delete(id):
     db_connection = db.connect_to_database()
@@ -557,8 +548,7 @@ def shipment_delete(id):
     # redirect
     return redirect("/shipments")
 
-### Listener
-
+# Listener
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 6654))
     app.run(port=port, debug=True)
