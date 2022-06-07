@@ -1,54 +1,82 @@
 <html>
 
-<head>
-	<title>Edit Artists</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<div style="text-align: center;">
+<div style="display: inline-block; text-align: center;">
+
+<h3>Artist Management</h3>
+<h4>Edit Artist</h4>
 
 <body>
     <div>
 
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
-        </br>
 
         <div id="edit">
             <!-- form to edit data in artists-->
             <form id="ArtistEdit" action="/artist_edit/{{data[0].id}}" method="post">
-                <legend><strong>Edit Artist</strong></legend>
                 <fieldset>
                     <!-- We can preset form inputs to match attributes currently stored for 'id' of person to be updated via value= and accessing our passed data tuple -->
                     <!-- Create hidden form input to store the passed 'id' of the person we are editing so we can access it easily in our 'POST' method in our app.py -->
 
                     <input type="hidden" value="{{data[0].id}}" class="form-control" id="personID" name="id" required>
                     
-                    <label for="make">last name:</label>
-                    <input type="text" value="{{data[0].last_name}}" class="form-control" id="lname" name="last_name" pattern="[A-Za-z]{1,}" required>
+                    <div class="form-group row">
+                        <label for="make">Last Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].last_name}}" class="form-control" id="lname" name="last_name" pattern="[A-Za-z]{1,}" required>
+                    </div>
+
+                    </br>
                     
-                    <label for="model">first name:</label>
-                    <input type="text" value="{{data[0].first_name}}" class="form-control" id="fname" name="first_name" pattern="[A-Za-z0-9]{1,}" required>
-                    
-                    <label for="year">address:</label>
-                    <input type="text" value="{{data[0].address}}" class="form-control" id="address" name="address" required>
+                    <div class="form-group row">
+                        <label for="model">First Name</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].first_name}}" class="form-control" id="fname" name="first_name" pattern="[A-Za-z0-9]{1,}" required>
+                    </div>
 
-                    <label for="year">city:</label>
-                    <input type="text" value="{{data[0].city}}" class="form-control" id="city" name="city" pattern="[A-Za-z0-9]{1,}" required>
+                    </br>
 
-                    <label for="year">state:</label>
-                    <input type="text" value="{{data[0].state}}" class="form-control" id="state" name="state" pattern="[A-Za-z0-9]{1,}" required>
-    
-                    <label for="year">zip:</label>
-                    <input type="text" value="{{data[0].zip}}" class="form-control" id="zip" name="zip" pattern="[A-Za-z0-9]{1,}" required>
+                    <div class="form-group row">
+                        <label for="year">Address</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].address}}" class="form-control" id="address" name="address" required>
+                    </div>
 
-                    <label for="year">phone:</label>
-                    <input type="tel" value="{{data[0].phone}}" class="form-control" id="phone" name="phone" pattern="[A-Za-z0-9]{1,}" required>
+                    </br>
+
+                    <div class="form-group row">
+                        <label for="year">City</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].city}}" class="form-control" id="city" name="city" pattern="[A-Za-z0-9]{1,}" required>
+                    </div>
+
+                    </br>
+
+                    <div class="form-group row">
+                        <label for="year">State</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].state}}" class="form-control" id="state" name="state" pattern="[A-Za-z0-9]{1,}" required>
+                    </div>
+
+                    </br>
+
+                    <div class="form-group row">
+                        <label for="year">Zip</label>
+                        <div class="col-sm-10">
+                        <input type="text" value="{{data[0].zip}}" class="form-control" id="zip" name="zip" pattern="[A-Za-z0-9]{1,}" required>
+                    </div>
+
+                    </br>
+
+                    <div class="form-group row">
+                        <label for="year">Phone</label>
+                        <div class="col-sm-10">
+                        <input type="tel" value="{{data[0].phone}}" class="form-control" id="phone" name="phone" pattern="[A-Za-z0-9]{1,}" required>
+                    </div>
 
                 </fieldset>
                 <input type="submit" value="Edit Artist" name="edit_artist" class="btn btn-primary" style="margin:.5rem;">
-                <a href='/artists'><input class="btn" type="button" value="cancel"></a>
+                <a href='/artists'><input class="btn" type="button" value="Cancel"></a>
             </form>
 
 </html>
