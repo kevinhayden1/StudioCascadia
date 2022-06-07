@@ -19,44 +19,8 @@
         <h2></h2>
         <h3>Artist Management</h3>
         <p></p>
-        <br>
 
-        <div id="search">
-            <form id="artist_search" method="POST">
-                <label><strong>Search Artists by first or last name:</strong></label>
-            <input type="text" id="ArtistName" name="ArtistName" placeholder="First/Last Name">
-            <input class="btn btn-primary" type="submit" name="searchArtist" value="Search">
-            </form>
-            </div>
-            
-            {% if search_results %}
-                <fieldset>
-                {{ "Search Results: " }}
-            <table border="1" cellpadding="5">
-            <thead>
-                <tr>
-                {% for key in search_results[0].keys() %}
-                <th> {{ key }} </th>
-                    {% endfor %}
-                </tr>
-            <tbody>
-            
-            {% for r in search_results %}
-                <tr>
-                {% for key in r.keys() %}
-                <td>{{r[key]}}</td> 
-                {% endfor %}
-                </tr>
-            {% endfor %}
-            </table>
-            <a href='/artists'><input class="btn" type="button" value="Clear Search Results"></a>
-            </fieldset>
-            <p>&nbsp;</p>
-            {% endif %}
-    
     <p></p>
-
-        <br>
 
         <table>
         <thead>
