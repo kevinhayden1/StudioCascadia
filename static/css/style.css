@@ -58,3 +58,5 @@ td {
 #content {
     width: 70%;
 }
+
+fieldset { border:0px;}
